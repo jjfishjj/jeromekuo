@@ -1,6 +1,12 @@
 import { Layout } from "@/components/layout/Layout";
 import { languageData } from "@/data/siteData";
-import { Globe, MessageCircle, AlertCircle } from "lucide-react";
+import { Globe, MessageCircle, AlertCircle, Mic, Brain, BookOpen, Laugh, ExternalLink } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { lazy, Suspense } from "react";
+
+const LearningStyleQuiz = lazy(() => import("@/components/language/LearningStyleQuiz"));
+const LanguageFunFacts = lazy(() => import("@/components/language/LanguageFunFacts"));
+const LanguageChatbot = lazy(() => import("@/components/language/LanguageChatbot"));
 
 const levelColors: Record<string, string> = {
   Native: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
@@ -62,6 +68,148 @@ const Language = () => {
                 <p className="text-sm text-muted-foreground">{lang.note}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Polyglot Conference */}
+      <section className="py-16 bg-muted/30">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                <Mic className="h-5 w-5 text-accent" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">Polyglot Conference</h2>
+                <p className="text-sm text-muted-foreground">多語言大會線上講座講者</p>
+              </div>
+            </div>
+            <div className="card-elevated rounded-xl p-6">
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                受邀參與 <strong className="text-foreground">Polyglot Conference</strong> 線上講座，
+                分享多語言學習經驗與學習型態（Learning Styles）的實踐應用。
+                講座結合個人在視覺、聽覺、動覺、邏輯四種學習型態上的跨語言訓練方法，
+                探討如何透過系統化的自我實驗來優化語言習得效率。
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {["Learning Styles", "Multilingual", "VARK", "Cross-Training"].map((tag) => (
+                  <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href="https://live.polyglotconference.com/programme/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline"
+              >
+                查看 Polyglot Conference <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Sections */}
+      <section className="py-20">
+        <div className="section-container">
+          <Tabs defaultValue="quiz" className="w-full">
+            <div className="flex flex-col items-center mb-10">
+              <h2 className="text-2xl font-semibold text-foreground mb-4 text-center">互動體驗區</h2>
+              <TabsList className="grid grid-cols-3 w-full max-w-md">
+                <TabsTrigger value="quiz" className="gap-1.5 text-xs sm:text-sm">
+                  <Brain className="h-4 w-4" /> 學習型態測驗
+                </TabsTrigger>
+                <TabsTrigger value="blog" className="gap-1.5 text-xs sm:text-sm">
+                  <Laugh className="h-4 w-4" /> 語言趣事
+                </TabsTrigger>
+                <TabsTrigger value="chat" className="gap-1.5 text-xs sm:text-sm">
+                  <MessageCircle className="h-4 w-4" /> 多語言對話
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            <TabsContent value="quiz">
+              <div className="mb-6 text-center">
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                  透過 5 道情境題，找出你的主要學習型態（視覺 / 聽覺 / 動覺 / 邏輯），
+                  並獲得對應的語言學習訓練建議。
+                </p>
+              </div>
+              <Suspense fallback={<div className="text-center text-muted-foreground py-12">載入中...</div>}>
+                <LearningStyleQuiz />
+              </Suspense>
+            </TabsContent>
+
+            <TabsContent value="blog">
+              <div className="mb-6 text-center">
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                  學語言過程中遇到的有趣發現、發音趣事、文化差異與認知實驗。
+                </p>
+              </div>
+              <Suspense fallback={<div className="text-center text-muted-foreground py-12">載入中...</div>}>
+                <LanguageFunFacts />
+              </Suspense>
+            </TabsContent>
+
+            <TabsContent value="chat">
+              <div className="mb-6 text-center">
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                  試試用不同語言跟助手對話！它會自動偵測你使用的語言並回應。
+                </p>
+              </div>
+              <Suspense fallback={<div className="text-center text-muted-foreground py-12">載入中...</div>}>
+                <LanguageChatbot />
+              </Suspense>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Learning Style Training Reference */}
+      <section className="py-16 bg-muted/30">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <BookOpen className="h-5 w-5 text-accent" />
+              <h2 className="text-2xl font-semibold text-foreground">學習型態訓練資源</h2>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <a
+                href="https://gamma.app/docs/Four-Learning-Styles-igavxy8k0vgvymi?mode=doc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-5 rounded-xl border border-border bg-card hover:border-accent/40 transition-all group"
+              >
+                <h4 className="font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
+                  Four Learning Styles
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  VARK 學習型態完整指南，包含辨識方法、訓練技巧與跨型態混合練習策略。
+                </p>
+                <span className="inline-flex items-center gap-1 text-xs text-accent mt-3">
+                  Gamma Doc <ExternalLink className="h-3 w-3" />
+                </span>
+              </a>
+              <a
+                href="https://learning-d6cdwr.manus.space/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-5 rounded-xl border border-border bg-card hover:border-accent/40 transition-all group"
+              >
+                <h4 className="font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
+                  Learning Style Quiz (Manus)
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  互動式學習型態測驗，5 題快速測試，結合個人化語言學習建議。
+                </p>
+                <span className="inline-flex items-center gap-1 text-xs text-accent mt-3">
+                  Manus App <ExternalLink className="h-3 w-3" />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
