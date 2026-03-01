@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { learningStyles } from "@/data/siteData";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Eye, Ear, Hand, ListChecks, Shuffle, Lightbulb } from "lucide-react";
 
 const styleIcons = {
@@ -19,78 +20,107 @@ const styleColors = {
 const Memory = () => {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="pt-24 pb-16 bg-muted/30">
+      {/* Hero — Blog-style full-width banner area */}
+      <section className="pt-24 pb-12 bg-muted/30">
         <div className="section-container">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto">
             <span className="inline-block text-xs font-medium text-accent bg-highlight-subtle px-2.5 py-1 rounded-full mb-4">
               Core Theory
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
               {learningStyles.title}
             </h1>
-            <p className="text-xl text-muted-foreground mb-4">
+            <p className="text-xl text-muted-foreground mb-2">
               {learningStyles.subtitle}
             </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              {learningStyles.intro}
+            <p className="text-sm text-muted-foreground">
+              發佈於 JJ Fish 個人研究筆記
             </p>
           </div>
         </div>
       </section>
 
-      {/* Four Styles */}
-      <section className="py-20">
+      {/* Featured Image Placeholder */}
+      <section className="pb-8">
         <div className="section-container">
-          <div className="grid md:grid-cols-2 gap-8">
-            {learningStyles.styles.map((style) => {
+          <div className="max-w-3xl mx-auto">
+            <MediaPlaceholder
+              type="image"
+              aspectRatio="16/9"
+              caption="封面圖：四種學習型態視覺示意"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Intro Paragraph — Blog prose */}
+      <section className="pb-16">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-lg text-foreground leading-relaxed">
+              {learningStyles.intro}
+            </p>
+            <hr className="my-10 border-border/50" />
+          </div>
+        </div>
+      </section>
+
+      {/* Four Styles — Blog article cards with inline media */}
+      <section className="pb-20">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto space-y-16">
+            {learningStyles.styles.map((style, idx) => {
               const Icon = styleIcons[style.id as keyof typeof styleIcons];
               const colorClass = styleColors[style.color as keyof typeof styleColors];
 
               return (
-                <article
-                  key={style.id}
-                  className="card-elevated rounded-xl p-8 hover:shadow-elevated transition-shadow"
-                >
-                  {/* Header */}
-                  <div className="flex items-start gap-4 mb-6">
+                <article key={style.id}>
+                  {/* Style Header */}
+                  <div className="flex items-center gap-4 mb-6">
                     <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${colorClass}`}>
                       <Icon className="h-6 w-6" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-foreground">
+                      <h2 className="text-2xl font-semibold text-foreground">
                         {style.nameZh}
-                      </h3>
+                      </h2>
                       <p className="text-sm text-muted-foreground">{style.name}</p>
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <p className="text-muted-foreground leading-relaxed mb-6">
+                  {/* Description prose */}
+                  <p className="text-base text-muted-foreground leading-relaxed mb-6">
                     {style.description}
                   </p>
 
-                  {/* Strengths */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium text-foreground mb-2">優勢</h4>
-                    <ul className="space-y-1">
-                      {style.strengths.map((s, i) => (
-                        <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                          <span className="text-accent mt-1">·</span>
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* Inline media placeholder */}
+                  <MediaPlaceholder
+                    type={idx % 2 === 0 ? "image" : "video"}
+                    aspectRatio="3/2"
+                    caption={`${style.nameZh}學習情境示意${idx % 2 === 1 ? "影片" : "圖片"}`}
+                  />
 
-                  {/* Challenges */}
-                  <div className="mb-6">
-                    <h4 className="text-sm font-medium text-foreground mb-2">挑戰</h4>
-                    <p className="text-sm text-muted-foreground">{style.challenges}</p>
+                  {/* Strengths & Challenges side by side */}
+                  <div className="grid sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <h4 className="text-sm font-medium text-foreground mb-2">優勢</h4>
+                      <ul className="space-y-1">
+                        {style.strengths.map((s, i) => (
+                          <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-accent mt-1">·</span>
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-foreground mb-2">挑戰</h4>
+                      <p className="text-sm text-muted-foreground">{style.challenges}</p>
+                    </div>
                   </div>
 
                   {/* Techniques */}
-                  <div className="border-t border-border/50 pt-6">
+                  <div className="border-t border-border/50 pt-5">
                     <h4 className="text-sm font-medium text-foreground mb-3">學習技巧</h4>
                     <div className="flex flex-wrap gap-2">
                       {style.techniques.map((t, i) => (
@@ -103,6 +133,11 @@ const Memory = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* Divider between styles */}
+                  {idx < learningStyles.styles.length - 1 && (
+                    <hr className="mt-12 border-border/50" />
+                  )}
                 </article>
               );
             })}
@@ -110,10 +145,10 @@ const Memory = () => {
         </div>
       </section>
 
-      {/* Cross-Training */}
+      {/* Cross-Training — with media */}
       <section className="py-20 bg-muted/30">
         <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="max-w-3xl mx-auto text-center mb-10">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-highlight-subtle text-accent mb-4">
               <Shuffle className="h-6 w-6" />
             </div>
@@ -125,7 +160,15 @@ const Memory = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="max-w-3xl mx-auto">
+            <MediaPlaceholder
+              type="video"
+              aspectRatio="16/9"
+              caption="混合學習法實際演示影片"
+            />
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
             {learningStyles.crossTraining.examples.map((ex, i) => (
               <div
                 key={i}
@@ -139,10 +182,10 @@ const Memory = () => {
         </div>
       </section>
 
-      {/* Personal Methods */}
+      {/* Personal Methods — blog prose with inline media */}
       <section className="py-20">
         <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="max-w-3xl mx-auto text-center mb-10">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-highlight-subtle text-accent mb-4">
               <Lightbulb className="h-6 w-6" />
             </div>
@@ -154,12 +197,17 @@ const Memory = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="max-w-3xl mx-auto">
+            <MediaPlaceholder
+              type="image"
+              aspectRatio="16/9"
+              caption="個人訓練方法概覽圖"
+            />
+          </div>
+
+          <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-6 mt-10">
             {learningStyles.personalMethods.methods.map((method, i) => (
-              <div
-                key={i}
-                className="card-elevated rounded-xl p-6"
-              >
+              <div key={i} className="card-elevated rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-foreground mb-1">
                   {method.categoryZh}
                 </h3>
