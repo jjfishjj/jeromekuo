@@ -7,14 +7,139 @@ export const siteConfig = {
   description: "跨領域創作者與系統設計者，結合學習科學、行為反思、語言與遊戲設計、數據分析與實作能力。",
   github: "https://github.com/jjfishjj",
   email: "TODO: 請補充 Email",
+  bookingUrl: "#contact", // 預約連結，可替換為 LINE / Calendly 等
 };
 
 export const heroData = {
-  greeting: "Hello, I'm",
+  greeting: "✨ 學習系統 × 記憶設計",
   name: "JJ Fish",
-  tagline: "Learning Systems · Memory Design · Applied Reflection",
-  subtitle: "探索人如何學習與記憶，並將這些理解轉化為講座、系統化紀錄、軟體與遊戲設計。",
+  role: "學習系統設計師 ×\n記憶應用顧問",
+  tagline: "把學習科學變成你的超能力：透過系統化的記憶設計，讓學習更高效、反思更有力。",
+  domains: ["學習科學", "記憶設計", "行為反思"],
+  ctaPrimary: "預約 30 分鐘探索通話",
+  ctaSecondary: "瀏覽學習資源",
 };
+
+export const statsData = [
+  { value: "4+", label: "學習型態研究" },
+  { value: "5", label: "語言能力" },
+  { value: "∞", label: "持續學習" },
+];
+
+export const skillsData = {
+  learning: [
+    { icon: "🧠", title: "學習型態分析", desc: "四種學習型態的識別與交叉訓練方法設計" },
+    { icon: "📊", title: "記憶系統設計", desc: "結合間隔重複、主動回憶的記憶強化系統" },
+    { icon: "🔄", title: "行為資料化", desc: "將日常反思轉化為可追蹤的成長數據" },
+    { icon: "💡", title: "跨感官整合", desc: "多感官學習法的研究與實踐應用" },
+  ],
+  tech: [
+    { icon: "🚀", title: "系統化紀錄", desc: "建立可重複的紀錄框架與分析模型" },
+    { icon: "⚡", title: "遊戲化設計", desc: "回饋迴路、動機系統的學習應用" },
+    { icon: "🤖", title: "AI 輔助學習", desc: "結合 AI 工具強化語言與記憶訓練" },
+    { icon: "🗄️", title: "數據分析", desc: "從長期資料中發現行為趨勢與模式" },
+  ],
+};
+
+export const servicesData = [
+  {
+    icon: "🎯",
+    title: "學習型態諮詢",
+    pain: "不知道自己適合什麼學習方法？",
+    solution: "透過專業分析找出你的學習型態，設計專屬的學習策略",
+    includes: ["學習型態評估", "個人化學習計畫", "記憶技巧指導", "定期追蹤調整"],
+  },
+  {
+    icon: "⚙️",
+    title: "記憶系統設計",
+    pain: "學過的東西總是記不住？",
+    solution: "建立系統化的記憶強化方法，讓知識真正留在腦中",
+    includes: ["記憶策略規劃", "間隔重複系統", "多感官強化", "效果追蹤"],
+  },
+  {
+    icon: "🚀",
+    title: "成長日誌工作坊",
+    pain: "想要有系統地記錄與反思成長？",
+    solution: "學習如何將自我觀察轉化為可追蹤的數據，加速個人成長",
+    includes: ["反思框架建立", "行為記錄方法", "模式分析技巧", "迭代優化"],
+  },
+  {
+    icon: "🎓",
+    title: "語言學習策略",
+    pain: "學語言效率低、容易放棄？",
+    solution: "結合多語言經驗，設計適合你的語言學習路徑",
+    includes: ["學習路徑規劃", "多感官記憶法", "跨語言對比", "實戰練習設計"],
+  },
+];
+
+export const caseStudiesData = [
+  {
+    icon: "🧠",
+    tag: "學習系統",
+    category: "記憶與學習型態研究",
+    title: "四種學習型態的識別與交叉訓練方法",
+    tags: ["視覺型", "聽覺型", "動覺型", "邏輯型"],
+    challenge: "傳統教育採用單一教學法，無法滿足不同學習型態學生的需求",
+    solution: "研究四種學習型態的特徵，設計混合式交叉訓練方法，提升學習彈性與效果",
+    results: [
+      { value: "4 種", label: "學習型態分析" },
+      { value: "混合式", label: "交叉訓練法" },
+    ],
+    link: "/memory",
+  },
+  {
+    icon: "📓",
+    tag: "成長專案",
+    category: "行為資料化實驗",
+    title: "成長日誌：將自我觀察系統化的長期實驗",
+    tags: ["結構化紀錄", "行為追蹤", "反思分析"],
+    challenge: "傳統日記只記錄事件，缺乏系統性的自我觀察與行為分析",
+    solution: "建立多維度紀錄框架，將身體覺察、心理狀態、行為模式轉化為可追蹤數據",
+    results: [
+      { value: "多維度", label: "記錄框架" },
+      { value: "長期", label: "持續實驗" },
+    ],
+    link: "/journal",
+  },
+  {
+    icon: "🌍",
+    tag: "語言應用",
+    category: "多語言認知研究",
+    title: "5 種語言的學習策略與認知切換訓練",
+    tags: ["中文", "英文", "韓語", "西班牙語", "法語"],
+    challenge: "學習多語言時容易混淆，缺乏有效的跨語言記憶策略",
+    solution: "運用多感官學習法與跨語言對比，建立高效的多語言學習系統",
+    results: [
+      { value: "5 種", label: "語言能力" },
+      { value: "系統化", label: "學習策略" },
+    ],
+    link: "/language",
+  },
+];
+
+export const testimonialsData = [
+  {
+    quote: "JJ 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
+    avatar: "👨‍🎓",
+    name: "學習者 A",
+    role: "研究生",
+    org: "某大學",
+  },
+  {
+    quote: "成長日誌的方法論讓我的自我反思變得更有系統。現在我能清楚看到自己的行為模式和成長軌跡。",
+    avatar: "👩‍💼",
+    name: "學習者 B",
+    role: "職場新鮮人",
+    org: "某科技公司",
+  },
+  {
+    quote: "跟著 JJ 的語言學習策略，我同時學習韓語和西班牙語的效率提高了很多。多感官記憶法真的很有效。",
+    avatar: "👨‍💻",
+    name: "學習者 C",
+    role: "語言愛好者",
+    org: "自學者",
+  },
+];
 
 export const coreAxes = [
   {
