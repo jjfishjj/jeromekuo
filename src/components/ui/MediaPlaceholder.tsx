@@ -2,7 +2,7 @@ import { ImageIcon, Video } from "lucide-react";
 
 interface MediaPlaceholderProps {
   type?: "image" | "video";
-  aspectRatio?: "16/9" | "4/3" | "1/1" | "3/2";
+  aspectRatio?: "16/9" | "4/3" | "1/1" | "3/2" | "3/4" | "2/3";
   caption?: string;
   className?: string;
 }

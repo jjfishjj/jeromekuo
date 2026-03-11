@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Globe } from "lucide-react";
-import { navigation } from "@/data/siteData";
+import { navigation, siteConfig } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -17,19 +17,24 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/30">
       <nav className="section-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             to="/"
-            className="text-lg font-semibold tracking-tight text-foreground hover:text-accent transition-colors"
+            className="flex items-center gap-2"
           >
-            JJ Fish
+            <span className="text-lg font-bold text-foreground">
+              {siteConfig.name.split(" ")[0]}
+            </span>
+            <span className="text-lg font-light text-muted-foreground">
+              {siteConfig.name.split(" ").slice(1).join(" ")}
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {navigation.slice(0, -1).map((item) => (
               <Link
                 key={item.path}
@@ -37,8 +42,8 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
                 className={cn(
                   "px-3 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive(item.path)
-                    ? "text-accent bg-highlight-subtle"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {lang === "zh" ? item.nameZh : item.name}
@@ -52,22 +57,18 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={onToggleLang}
-              className="hidden md:flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+              className="hidden lg:flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
             >
               <Globe className="h-4 w-4" />
               <span className="text-xs font-medium">{lang === "zh" ? "EN" : "中"}</span>
             </Button>
 
-            <Link to="/contact" className="hidden md:block">
+            <Link to="/contact" className="hidden lg:block">
               <Button
-                variant="outline"
                 size="sm"
-                className={cn(
-                  "border-border/60 hover:border-accent hover:text-accent",
-                  isActive("/contact") && "border-accent text-accent"
-                )}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
               >
-                {lang === "zh" ? "聯絡" : "Contact"}
+                {lang === "zh" ? "預約諮詢" : "Book Now"}
               </Button>
             </Link>
 
@@ -75,7 +76,7 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -85,7 +86,7 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border/50 animate-fade-in">
+          <div className="lg:hidden py-4 border-t border-border/30 animate-fade-in">
             <div className="flex flex-col gap-1">
               {navigation.map((item) => (
                 <Link
@@ -95,14 +96,14 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
                   className={cn(
                     "px-3 py-2.5 text-sm font-medium rounded-md transition-colors",
                     isActive(item.path)
-                      ? "text-accent bg-highlight-subtle"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   )}
                 >
                   {lang === "zh" ? item.nameZh : item.name}
                 </Link>
               ))}
-              <div className="pt-2 mt-2 border-t border-border/50">
+              <div className="pt-3 mt-2 border-t border-border/30 flex gap-2">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -110,11 +111,16 @@ export const Header = ({ lang, onToggleLang }: HeaderProps) => {
                     onToggleLang();
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full justify-start gap-2 text-muted-foreground"
+                  className="flex-1 text-muted-foreground"
                 >
-                  <Globe className="h-4 w-4" />
-                  {lang === "zh" ? "Switch to English" : "切換至中文"}
+                  <Globe className="h-4 w-4 mr-2" />
+                  {lang === "zh" ? "English" : "中文"}
                 </Button>
+                <Link to="/contact" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
+                  <Button size="sm" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                    預約諮詢
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

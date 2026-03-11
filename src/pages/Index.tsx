@@ -1,188 +1,393 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { heroData, coreAxes } from "@/data/siteData";
+import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import {
+  heroData,
+  statsData,
+  skillsData,
+  servicesData,
+  caseStudiesData,
+  testimonialsData,
+  siteConfig,
+} from "@/data/siteData";
 import { Button } from "@/components/ui/button";
-import { AxisIcon } from "@/components/ui/AxisIcon";
 import { Layout } from "@/components/layout/Layout";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { useState } from "react";
 
 const Index = () => {
+  const [skillTab, setSkillTab] = useState<"learning" | "tech">("learning");
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-              backgroundSize: "32px 32px",
-            }}
-          />
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <div className="section-container relative z-10 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Content */}
+            <div className="space-y-6">
+              <span className="tag-pill opacity-0 animate-fade-in">
+                {heroData.greeting}
+              </span>
+
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
+                <span className="whitespace-pre-line">
+                  {heroData.role.split("×")[0]}
+                  <span className="text-primary">×</span>
+                  {"\n"}
+                  <span className="text-primary">{heroData.role.split("×")[1]?.trim()}</span>
+                </span>
+              </h1>
+
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg opacity-0 animate-slide-up [animation-delay:0.2s]">
+                {heroData.tagline}
+              </p>
+
+              {/* Domain tags */}
+              <div className="flex flex-wrap gap-2 opacity-0 animate-slide-up [animation-delay:0.25s]">
+                {heroData.domains.map((d) => (
+                  <span key={d} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                    {d}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 opacity-0 animate-slide-up [animation-delay:0.3s]">
+                <Link to="/contact">
+                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
+                    {heroData.ctaPrimary}
+                  </Button>
+                </Link>
+                <Link to="/memory">
+                  <Button size="lg" variant="outline" className="border-border hover:border-primary hover:text-primary px-8">
+                    {heroData.ctaSecondary}
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Stats */}
+              <div className="flex gap-8 pt-6 border-t border-border/50 opacity-0 animate-slide-up [animation-delay:0.4s]">
+                {statsData.map((s) => (
+                  <div key={s.label}>
+                    <div className="stat-number">{s.value}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Photo placeholder */}
+            <div className="relative opacity-0 animate-slide-up [animation-delay:0.2s]">
+              <div className="relative">
+                <MediaPlaceholder
+                  type="image"
+                  aspectRatio="3/4"
+                  caption="個人形象照"
+                />
+                {/* Floating badge */}
+                <div className="absolute -bottom-4 -left-4 glass-card px-4 py-3 animate-float">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🧠</span>
+                    <div>
+                      <div className="text-xs text-muted-foreground">學習系統</div>
+                      <div className="text-sm font-semibold text-primary">記憶設計</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Another floating badge */}
+                <div className="absolute -top-4 -right-4 glass-card px-4 py-3 animate-float [animation-delay:1.5s]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">📊</span>
+                    <div>
+                      <div className="text-xs text-muted-foreground">行為反思</div>
+                      <div className="text-sm font-semibold text-primary">資料化</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div className="section-container relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium text-muted-foreground tracking-wider uppercase mb-4 opacity-0 animate-fade-in">
-              {heroData.greeting}
-            </p>
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 opacity-0 animate-slide-up [animation-delay:0.1s]">
-              {heroData.name}
-            </h1>
-            <p className="text-lg md:text-xl text-gradient font-medium mb-6 opacity-0 animate-slide-up [animation-delay:0.2s]">
-              {heroData.tagline}
-            </p>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 opacity-0 animate-slide-up [animation-delay:0.3s]">
-              {heroData.subtitle}
-            </p>
+      {/* Skills / Capabilities — Tabs */}
+      <section className="py-24 border-t border-border/30">
+        <div className="section-container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              學習能力 × 技術能力
+            </h2>
+            <p className="text-muted-foreground">不只是理論，也懂系統落地</p>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-slide-up [animation-delay:0.4s]">
-              <Link to="/memory">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8">
-                  探索學習型態
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+          {/* Tab switcher */}
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex bg-secondary rounded-lg p-1">
+              <button
+                onClick={() => setSkillTab("learning")}
+                className={`px-5 py-2 rounded-md text-sm font-medium transition-all ${
+                  skillTab === "learning"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                學習能力
+              </button>
+              <button
+                onClick={() => setSkillTab("tech")}
+                className={`px-5 py-2 rounded-md text-sm font-medium transition-all ${
+                  skillTab === "tech"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                技術能力
+              </button>
+            </div>
+          </div>
+
+          {/* Skill cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {(skillTab === "learning" ? skillsData.learning : skillsData.tech).map((skill) => (
+              <div
+                key={skill.title}
+                className="glass-card p-6 hover:border-primary/30 transition-all group"
+              >
+                <span className="text-3xl mb-4 block">{skill.icon}</span>
+                <h3 className="text-base font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {skill.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{skill.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-muted-foreground mt-8 max-w-2xl mx-auto">
+            結合<span className="text-primary font-medium">學習科學</span>與<span className="text-primary font-medium">系統化思維</span>，讓學習不只是概念，而是能真正產生改變的方法論。
+          </p>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-24 bg-secondary/30">
+        <div className="section-container">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              我能如何協助您
+            </h2>
+            <p className="text-muted-foreground">從評估到實踐，提供完整的學習解決方案</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {servicesData.map((service) => (
+              <div
+                key={service.title}
+                className="glass-card p-8 group hover:border-primary/30 transition-all"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <span className="text-3xl">{service.icon}</span>
+                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4 group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                <div className="space-y-3 mb-6">
+                  <div>
+                    <span className="text-xs font-medium text-destructive/80">痛點</span>
+                    <p className="text-sm text-muted-foreground">{service.pain}</p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-medium text-primary">解方</span>
+                    <p className="text-sm text-foreground/80">{service.solution}</p>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-xs font-medium text-muted-foreground mb-2 block">包含內容：</span>
+                  <ul className="space-y-1">
+                    {service.includes.map((item) => (
+                      <li key={item} className="text-xs text-muted-foreground flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link to="/contact" className="mt-6 block">
+                  <Button variant="outline" size="sm" className="w-full border-border hover:border-primary hover:text-primary">
+                    預約諮詢
+                  </Button>
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-4">不確定哪個方案適合你？讓我們聊聊你的需求</p>
+            <Link to="/contact">
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                預約免費諮詢
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-24">
+        <div className="section-container">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              成功案例
+            </h2>
+            <p className="text-muted-foreground">看看如何將學習理論轉化為實際成果</p>
+          </div>
+
+          <div className="max-w-5xl mx-auto space-y-8">
+            {caseStudiesData.map((cs, i) => (
+              <Link
+                key={i}
+                to={cs.link}
+                className="block glass-card p-8 group hover:border-primary/30 transition-all"
+              >
+                <div className="flex flex-col md:flex-row gap-8">
+                  {/* Left info */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl">{cs.icon}</span>
+                      <span className="tag-pill">{cs.tag}</span>
+                      <span className="text-xs text-muted-foreground">{cs.category}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                      {cs.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {cs.tags.map((tag) => (
+                        <span key={tag} className="text-xs px-2 py-1 rounded-md bg-secondary text-muted-foreground">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-2">
+                        <span className="text-xs font-medium text-destructive/80 mt-0.5">⚠️</span>
+                        <div>
+                          <span className="text-xs font-medium text-muted-foreground">挑戰</span>
+                          <p className="text-sm text-muted-foreground">{cs.challenge}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="text-xs font-medium text-primary mt-0.5">✅</span>
+                        <div>
+                          <span className="text-xs font-medium text-muted-foreground">解決方案</span>
+                          <p className="text-sm text-foreground/80">{cs.solution}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right: Results */}
+                  <div className="flex md:flex-col gap-6 md:gap-4 md:w-48 md:border-l md:border-border/50 md:pl-8 items-center md:justify-center">
+                    {cs.results.map((r) => (
+                      <div key={r.label} className="text-center">
+                        <div className="text-2xl font-bold text-primary">{r.value}</div>
+                        <div className="text-xs text-muted-foreground">{r.label}</div>
+                      </div>
+                    ))}
+                    <span className="text-sm font-medium text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      了解更多 <ChevronRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </div>
               </Link>
-              <Link to="/journal">
-                <Button size="lg" variant="outline" className="border-border hover:border-accent hover:text-accent px-8">
-                  成長日誌專案
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <div className="glass-card inline-block p-8 max-w-lg">
+              <h3 className="text-lg font-semibold text-foreground mb-2">讓您的學習也成為成功案例</h3>
+              <p className="text-sm text-muted-foreground mb-4">無論是學習型態分析、記憶系統設計，還是成長日誌規劃，都能協助您達成目標</p>
+              <Link to="/contact">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  預約專案諮詢
                 </Button>
               </Link>
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </section>
 
-      {/* Hero Media — Blog-style featured visual */}
-      <section className="pb-16">
-        <div className="section-container">
-          <div className="max-w-4xl mx-auto">
-            <MediaPlaceholder
-              type="video"
-              aspectRatio="16/9"
-              caption="個人介紹影片 / 專案展示 Reel"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Core Axes Section — Blog card layout with media */}
-      <section className="py-24 bg-muted/30">
+      {/* Testimonials */}
+      <section className="py-24 bg-secondary/30">
         <div className="section-container">
           <div className="text-center mb-16">
-            <h2 className="text-sm font-medium text-accent tracking-wider uppercase mb-3">
-              Core Focus
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              客戶推薦
             </h2>
-            <p className="text-3xl md:text-4xl font-semibold text-foreground">
-              三個核心軸線
-            </p>
+            <p className="text-muted-foreground">看看學習者怎麼說</p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-16">
-            {coreAxes.map((axis, index) => (
-              <Link
-                key={axis.id}
-                to={axis.link}
-                className="group flex flex-col md:flex-row items-start gap-8 card-elevated rounded-xl p-8 transition-all duration-300 hover:shadow-elevated hover:-translate-y-1"
-              >
-                {/* Left: Media placeholder */}
-                <div className="w-full md:w-2/5 flex-shrink-0">
-                  <div
-                    className="relative w-full rounded-lg border-2 border-dashed border-border bg-muted/40 flex flex-col items-center justify-center gap-2 overflow-hidden transition-colors group-hover:border-accent/40"
-                    style={{ aspectRatio: "4/3" }}
-                  >
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted">
-                      <AxisIcon name={axis.icon as "brain" | "journal" | "code"} />
-                    </div>
-                    <span className="text-xs text-muted-foreground">封面圖片</span>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {testimonialsData.map((t, i) => (
+              <div key={i} className="glass-card p-6">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{t.avatar}</span>
+                  <div>
+                    <div className="text-sm font-semibold text-foreground">{t.name}</div>
+                    <div className="text-xs text-muted-foreground">{t.role} · {t.org}</div>
                   </div>
                 </div>
-
-                {/* Right: Content */}
-                <div className="flex-1">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-highlight-subtle text-accent mb-4 transition-transform group-hover:scale-110">
-                    <AxisIcon name={axis.icon as "brain" | "journal" | "code"} />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
-                    {axis.titleZh}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-3">{axis.title}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                    {axis.description}
-                  </p>
-                  <span className="flex items-center text-sm font-medium text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                    深入了解
-                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Entries — Blog post list style */}
+      {/* Final CTA */}
       <section className="py-24">
         <div className="section-container">
-          <div className="text-center mb-16">
-            <h2 className="text-sm font-medium text-accent tracking-wider uppercase mb-3">
-              Featured
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="tag-pill mb-6 inline-flex">🚀 開始您的學習之旅</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 mt-4">
+              想要找到最適合自己的學習方法？
             </h2>
-            <p className="text-3xl md:text-4xl font-semibold text-foreground">
-              精選入口
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+              讓我們聊 30 分鐘。我會幫您分析學習型態、規劃學習策略，並找到最有效的記憶方法。
             </p>
-          </div>
 
-          <div className="max-w-4xl mx-auto space-y-8">
-            {[
-              { to: "/memory", tag: "Core Theory", title: "記憶型態講座", desc: "四種學習型態的識別與應用，以及我的個人訓練方法。" },
-              { to: "/journal", tag: "Case Study", title: "成長日誌專案", desc: "將自我觀察與反思系統化，作為記憶與行為資料化的實驗。" },
-              { to: "/systems", tag: "Exploration", title: "技術專案與分析", desc: "Flutter、AI 助理、機器學習等實驗性專案總覽。" },
-            ].map((item, i) => (
-              <Link
-                key={i}
-                to={item.to}
-                className="group flex flex-col sm:flex-row items-start gap-6 rounded-xl border border-border/50 bg-card p-6 transition-all hover:border-accent/50 hover:shadow-soft"
-              >
-                {/* Thumbnail placeholder */}
-                <div className="w-full sm:w-48 flex-shrink-0">
-                  <div
-                    className="w-full rounded-lg border-2 border-dashed border-border bg-muted/40 flex items-center justify-center overflow-hidden transition-colors group-hover:border-accent/40"
-                    style={{ aspectRatio: "4/3" }}
-                  >
-                    <span className="text-xs text-muted-foreground">縮圖</span>
+            <div className="flex flex-wrap justify-center gap-8 mb-10">
+              {[
+                { icon: "🎯", title: "免費諮詢", desc: "30 分鐘探索通話" },
+                { icon: "📋", title: "務實評估", desc: "給出可行的建議" },
+                { icon: "⚡", title: "快速啟動", desc: "立即開始改變" },
+              ].map((item) => (
+                <div key={item.title} className="flex items-center gap-3">
+                  <span className="text-xl">{item.icon}</span>
+                  <div className="text-left">
+                    <div className="text-sm font-medium text-foreground">{item.title}</div>
+                    <div className="text-xs text-muted-foreground">{item.desc}</div>
                   </div>
                 </div>
-                <div className="flex-1">
-                  <span className="inline-block text-xs font-medium text-accent bg-highlight-subtle px-2 py-1 rounded mb-3">
-                    {item.tag}
-                  </span>
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+              ))}
+            </div>
 
-      {/* Quote / Philosophy */}
-      <section className="py-24 bg-primary text-primary-foreground">
-        <div className="section-container">
-          <blockquote className="max-w-3xl mx-auto text-center">
-            <p className="text-2xl md:text-3xl font-light leading-relaxed mb-6">
-              「最成功的學習者會根據材料與情境調整方法，<br className="hidden md:block" />
-              結合多種學習型態以達到最佳效果。」
-            </p>
-            <footer className="text-sm opacity-70">
-              — 學習型態研究核心理念
-            </footer>
-          </blockquote>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/contact">
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
+                  預約探索通話
+                </Button>
+              </Link>
+              <Link to="/memory">
+                <Button size="lg" variant="outline" className="border-border hover:border-primary hover:text-primary px-8">
+                  瀏覽學習資源 →
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </Layout>
