@@ -11,6 +11,8 @@ import Language from "./pages/Language";
 import Game from "./pages/Game";
 import Systems from "./pages/Systems";
 import Contact from "./pages/Contact";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
