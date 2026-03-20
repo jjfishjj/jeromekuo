@@ -12,7 +12,7 @@ export const siteConfig = {
 
 export const heroData = {
   greeting: "✨ 學習系統 × 記憶設計",
-  name: "JJ Fish",
+  name: "Jerome Kuo",
   role: "學習系統設計師 ×\n記憶應用顧問",
   tagline: "把學習科學變成你的超能力：透過系統化的記憶設計，讓學習更高效、反思更有力。",
   domains: ["學習科學", "記憶設計", "行為反思"],
