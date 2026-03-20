@@ -48,6 +48,7 @@ const Memory = () => {
               type="image"
               aspectRatio="16/9"
               caption="封面圖：四種學習型態視覺示意"
+              contentKey="memory.cover"
             />
           </div>
         </div>
