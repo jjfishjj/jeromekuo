@@ -119,7 +119,7 @@ export const caseStudiesData = [
 
 export const testimonialsData = [
   {
-    quote: "JJ 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
+    quote: "Jerome 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
     avatar: "👨‍🎓",
     name: "學習者 A",
     role: "研究生",
