@@ -99,6 +99,7 @@ const Memory = () => {
                     type={idx % 2 === 0 ? "image" : "video"}
                     aspectRatio="3/2"
                     caption={`${style.nameZh}學習情境示意${idx % 2 === 1 ? "影片" : "圖片"}`}
+                    contentKey={`memory.style.${style.id}`}
                   />
 
                   {/* Strengths & Challenges side by side */}
