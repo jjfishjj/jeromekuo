@@ -2,7 +2,7 @@
 // All content centralized for easy updates
 
 export const siteConfig = {
-  name: "JJ Fish",
+  name: "Jerome Kuo",
   title: "Learning Systems · Memory Design · Applied Reflection",
   description: "跨領域創作者與系統設計者，結合學習科學、行為反思、語言與遊戲設計、數據分析與實作能力。",
   github: "https://github.com/jjfishjj",
