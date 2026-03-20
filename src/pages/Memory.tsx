@@ -48,6 +48,7 @@ const Memory = () => {
               type="image"
               aspectRatio="16/9"
               caption="封面圖：四種學習型態視覺示意"
+              contentKey="memory.cover"
             />
           </div>
         </div>
@@ -98,6 +99,7 @@ const Memory = () => {
                     type={idx % 2 === 0 ? "image" : "video"}
                     aspectRatio="3/2"
                     caption={`${style.nameZh}學習情境示意${idx % 2 === 1 ? "影片" : "圖片"}`}
+                    contentKey={`memory.style.${style.id}`}
                   />
 
                   {/* Strengths & Challenges side by side */}
@@ -165,6 +167,7 @@ const Memory = () => {
               type="video"
               aspectRatio="16/9"
               caption="混合學習法實際演示影片"
+              contentKey="memory.crosstraining.video"
             />
           </div>
 
@@ -202,6 +205,7 @@ const Memory = () => {
               type="image"
               aspectRatio="16/9"
               caption="個人訓練方法概覽圖"
+              contentKey="memory.personal.overview"
             />
           </div>
 

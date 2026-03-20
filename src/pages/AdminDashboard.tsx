@@ -8,7 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { Trash2, Upload, LogOut, Image, FileText } from "lucide-react";
+import { Trash2, Upload, LogOut, Image, FileText, MapPin } from "lucide-react";
+import AdminImageSlots from "@/components/admin/AdminImageSlots";
 
 interface MediaItem {
   id: string;
@@ -173,8 +174,11 @@ const AdminDashboard = () => {
       </header>
 
       <div className="max-w-6xl mx-auto p-6">
-        <Tabs defaultValue="media">
+        <Tabs defaultValue="slots">
           <TabsList className="mb-6">
+            <TabsTrigger value="slots" className="gap-1.5">
+              <MapPin className="h-4 w-4" /> 頁面圖片
+            </TabsTrigger>
             <TabsTrigger value="media" className="gap-1.5">
               <Image className="h-4 w-4" /> 媒體庫
             </TabsTrigger>
@@ -182,6 +186,10 @@ const AdminDashboard = () => {
               <FileText className="h-4 w-4" /> 頁面內容
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="slots">
+            <AdminImageSlots userId={user?.id} />
+          </TabsContent>
 
           <TabsContent value="media">
             <Card>
