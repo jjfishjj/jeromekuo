@@ -2,7 +2,7 @@
 // All content centralized for easy updates
 
 export const siteConfig = {
-  name: "JJ Fish",
+  name: "Jerome Kuo",
   title: "Learning Systems · Memory Design · Applied Reflection",
   description: "跨領域創作者與系統設計者，結合學習科學、行為反思、語言與遊戲設計、數據分析與實作能力。",
   github: "https://github.com/jjfishjj",
@@ -12,7 +12,7 @@ export const siteConfig = {
 
 export const heroData = {
   greeting: "✨ 學習系統 × 記憶設計",
-  name: "JJ Fish",
+  name: "Jerome Kuo",
   role: "學習系統設計師 ×\n記憶應用顧問",
   tagline: "把學習科學變成你的超能力：透過系統化的記憶設計，讓學習更高效、反思更有力。",
   domains: ["學習科學", "記憶設計", "行為反思"],
@@ -119,7 +119,7 @@ export const caseStudiesData = [
 
 export const testimonialsData = [
   {
-    quote: "JJ 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
+    quote: "Jerome 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
     avatar: "👨‍🎓",
     name: "學習者 A",
     role: "研究生",
@@ -133,7 +133,7 @@ export const testimonialsData = [
     org: "某科技公司",
   },
   {
-    quote: "跟著 JJ 的語言學習策略，我同時學習韓語和西班牙語的效率提高了很多。多感官記憶法真的很有效。",
+    quote: "跟著 Jerome 的語言學習策略，我同時學習韓語和西班牙語的效率提高了很多。多感官記憶法真的很有效。",
     avatar: "👨‍💻",
     name: "學習者 C",
     role: "語言愛好者",
