@@ -167,6 +167,7 @@ const Memory = () => {
               type="video"
               aspectRatio="16/9"
               caption="混合學習法實際演示影片"
+              contentKey="memory.crosstraining.video"
             />
           </div>
 
