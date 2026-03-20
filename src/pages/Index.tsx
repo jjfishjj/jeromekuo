@@ -121,7 +121,7 @@ const Index = () => {
 
             <div className="relative opacity-0 animate-slide-up [animation-delay:0.2s]">
               <div className="relative">
-                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} />
+                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} contentKey="home.hero.profile" />
                 <div className="absolute -bottom-4 -left-4 glass-card px-4 py-3 animate-float">
                   <div className="flex items-center gap-2">
                     <span className="text-lg">🧠</span>

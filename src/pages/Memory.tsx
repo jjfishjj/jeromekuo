@@ -205,6 +205,7 @@ const Memory = () => {
               type="image"
               aspectRatio="16/9"
               caption="個人訓練方法概覽圖"
+              contentKey="memory.personal.overview"
             />
           </div>
 
