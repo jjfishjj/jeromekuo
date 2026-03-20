@@ -131,7 +131,7 @@ const zh = {
   "testimonials.title": "客戶推薦",
   "testimonials.subtitle": "看看學習者怎麼說",
 
-  "testimonial.1.quote": "JJ 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
+  "testimonial.1.quote": "Jerome 的學習型態分析讓我重新認識了自己的學習方式，學習效率明顯提升。他對記憶科學的理解非常深入，建議也很實用。",
   "testimonial.1.name": "學習者 A",
   "testimonial.1.role": "研究生",
   "testimonial.1.org": "某大學",
@@ -141,7 +141,7 @@ const zh = {
   "testimonial.2.role": "職場新鮮人",
   "testimonial.2.org": "某科技公司",
 
-  "testimonial.3.quote": "跟著 JJ 的語言學習策略，我同時學習韓語和西班牙語的效率提高了很多。多感官記憶法真的很有效。",
+  "testimonial.3.quote": "跟著 Jerome 的語言學習策略，我同時學習韓語和西班牙語的效率提高了很多。多感官記憶法真的很有效。",
   "testimonial.3.name": "學習者 C",
   "testimonial.3.role": "語言愛好者",
   "testimonial.3.org": "自學者",
@@ -180,7 +180,7 @@ const zh = {
 
   // Memory page
   "memory.tag": "Core Theory",
-  "memory.publishNote": "發佈於 JJ Fish 個人研究筆記",
+  "memory.publishNote": "發佈於 Jerome Kuo 個人研究筆記",
   "memory.coverCaption": "封面圖：四種學習型態視覺示意",
   "memory.strengths": "優勢",
   "memory.challenges": "挑戰",
@@ -422,7 +422,7 @@ const en: typeof zh = {
   "photo.badge2.value": "Data-Driven",
 
   "memory.tag": "Core Theory",
-  "memory.publishNote": "Published on JJ Fish's research notes",
+  "memory.publishNote": "Published on Jerome Kuo's research notes",
   "memory.coverCaption": "Cover: Four Learning Styles Visual",
   "memory.strengths": "Strengths",
   "memory.challenges": "Challenges",
@@ -659,7 +659,7 @@ const es: typeof zh = {
   "photo.badge2.value": "Basado en Datos",
 
   "memory.tag": "Teoría Central",
-  "memory.publishNote": "Publicado en las notas de investigación de JJ Fish",
+  "memory.publishNote": "Publicado en las notas de investigación de Jerome Kuo",
   "memory.coverCaption": "Portada: Los Cuatro Estilos de Aprendizaje",
   "memory.strengths": "Fortalezas",
   "memory.challenges": "Desafíos",
@@ -896,7 +896,7 @@ const he: typeof zh = {
   "photo.badge2.value": "מבוסס נתונים",
 
   "memory.tag": "תיאוריה מרכזית",
-  "memory.publishNote": "פורסם בהערות המחקר של JJ Fish",
+  "memory.publishNote": "פורסם בהערות המחקר של Jerome Kuo",
   "memory.coverCaption": "שער: ארבעת סגנונות הלמידה",
   "memory.strengths": "חוזקות",
   "memory.challenges": "אתגרים",
@@ -1133,7 +1133,7 @@ const ko: typeof zh = {
   "photo.badge2.value": "데이터 기반",
 
   "memory.tag": "핵심 이론",
-  "memory.publishNote": "JJ Fish의 연구 노트에 게시됨",
+  "memory.publishNote": "Jerome Kuo의 연구 노트에 게시됨",
   "memory.coverCaption": "표지: 네 가지 학습 유형",
   "memory.strengths": "강점",
   "memory.challenges": "도전",
@@ -1370,7 +1370,7 @@ const fr: typeof zh = {
   "photo.badge2.value": "Basé sur les Données",
 
   "memory.tag": "Théorie Centrale",
-  "memory.publishNote": "Publié dans les notes de recherche de JJ Fish",
+  "memory.publishNote": "Publié dans les notes de recherche de Jerome Kuo",
   "memory.coverCaption": "Couverture : Les Quatre Styles d'Apprentissage",
   "memory.strengths": "Forces",
   "memory.challenges": "Défis",

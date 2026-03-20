@@ -34,7 +34,7 @@ const Memory = () => {
               {learningStyles.subtitle}
             </p>
             <p className="text-sm text-muted-foreground">
-              發佈於 JJ Fish 個人研究筆記
+              發佈於 Jerome Kuo 個人研究筆記
             </p>
           </div>
         </div>
