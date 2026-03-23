@@ -17,6 +17,13 @@ const styleIcons = {
   logical: ListChecks,
 };
 
+const styleFallbacks: Record<string, string> = {
+  visual: placeholderVisual,
+  auditory: placeholderAuditory,
+  kinesthetic: placeholderKinesthetic,
+  readwrite: placeholderReadwrite,
+};
+
 const styleColors = {
   blue: "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400",
   green: "bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400",
