@@ -7,6 +7,7 @@ interface MediaPlaceholderProps {
   caption?: string;
   className?: string;
   contentKey?: string;
+  fallbackSrc?: string;
 }
 
 const MediaPlaceholder = ({
@@ -15,30 +16,31 @@ const MediaPlaceholder = ({
   caption,
   className = "",
   contentKey,
+  fallbackSrc,
 }: MediaPlaceholderProps) => {
   const { media, loading } = useSiteContent(contentKey);
   const Icon = type === "video" ? Video : ImageIcon;
   const label = type === "video" ? "影片區域" : "圖片區域";
 
-  const hasMedia = media?.media_url;
+  const displayUrl = media?.media_url || fallbackSrc;
 
   return (
     <figure className={`my-8 ${className}`}>
-      {hasMedia ? (
+      {displayUrl ? (
         <div
           className="relative w-full rounded-xl overflow-hidden"
           style={{ aspectRatio }}
         >
-          {type === "video" ? (
+          {type === "video" && media?.media_url ? (
             <video
-              src={media.media_url!}
+              src={media.media_url}
               className="w-full h-full object-cover"
               controls
               muted
             />
           ) : (
             <img
-              src={media.media_url!}
+              src={displayUrl}
               alt={caption || ""}
               className="w-full h-full object-cover"
               loading="lazy"

@@ -2,6 +2,13 @@ import { Layout } from "@/components/layout/Layout";
 import { learningStyles } from "@/data/siteData";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Eye, Ear, Hand, ListChecks, Shuffle, Lightbulb } from "lucide-react";
+import placeholderCover from "@/assets/placeholder-memory-cover.jpg";
+import placeholderVisual from "@/assets/placeholder-visual.jpg";
+import placeholderAuditory from "@/assets/placeholder-auditory.jpg";
+import placeholderKinesthetic from "@/assets/placeholder-kinesthetic.jpg";
+import placeholderReadwrite from "@/assets/placeholder-readwrite.jpg";
+import placeholderCrosstraining from "@/assets/placeholder-crosstraining.jpg";
+import placeholderPersonal from "@/assets/placeholder-personal-overview.jpg";
 
 const styleIcons = {
   visual: Eye,

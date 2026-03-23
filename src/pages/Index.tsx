@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout/Layout";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import placeholderProfile from "@/assets/placeholder-profile.jpg";
 
 const Index = () => {
   const [skillTab, setSkillTab] = useState<"learning" | "tech">("learning");
@@ -121,7 +122,7 @@ const Index = () => {
 
             <div className="relative opacity-0 animate-slide-up [animation-delay:0.2s]">
               <div className="relative">
-                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} contentKey="home.hero.profile" />
+                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} contentKey="home.hero.profile" fallbackSrc={placeholderProfile} />
                 <div className="absolute -bottom-4 -left-4 glass-card px-4 py-3 animate-float">
                   <div className="flex items-center gap-2">
                     <span className="text-lg">🧠</span>
