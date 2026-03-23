@@ -2,12 +2,26 @@ import { Layout } from "@/components/layout/Layout";
 import { learningStyles } from "@/data/siteData";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Eye, Ear, Hand, ListChecks, Shuffle, Lightbulb } from "lucide-react";
+import placeholderCover from "@/assets/placeholder-memory-cover.jpg";
+import placeholderVisual from "@/assets/placeholder-visual.jpg";
+import placeholderAuditory from "@/assets/placeholder-auditory.jpg";
+import placeholderKinesthetic from "@/assets/placeholder-kinesthetic.jpg";
+import placeholderReadwrite from "@/assets/placeholder-readwrite.jpg";
+import placeholderCrosstraining from "@/assets/placeholder-crosstraining.jpg";
+import placeholderPersonal from "@/assets/placeholder-personal-overview.jpg";
 
 const styleIcons = {
   visual: Eye,
   auditory: Ear,
   kinesthetic: Hand,
   logical: ListChecks,
+};
+
+const styleFallbacks: Record<string, string> = {
+  visual: placeholderVisual,
+  auditory: placeholderAuditory,
+  kinesthetic: placeholderKinesthetic,
+  readwrite: placeholderReadwrite,
 };
 
 const styleColors = {
@@ -49,6 +63,7 @@ const Memory = () => {
               aspectRatio="16/9"
               caption="封面圖：四種學習型態視覺示意"
               contentKey="memory.cover"
+              fallbackSrc={placeholderCover}
             />
           </div>
         </div>
@@ -100,6 +115,7 @@ const Memory = () => {
                     aspectRatio="3/2"
                     caption={`${style.nameZh}學習情境示意${idx % 2 === 1 ? "影片" : "圖片"}`}
                     contentKey={`memory.style.${style.id}`}
+                    fallbackSrc={styleFallbacks[style.id]}
                   />
 
                   {/* Strengths & Challenges side by side */}
@@ -168,6 +184,7 @@ const Memory = () => {
               aspectRatio="16/9"
               caption="混合學習法實際演示影片"
               contentKey="memory.crosstraining.video"
+              fallbackSrc={placeholderCrosstraining}
             />
           </div>
 
@@ -206,6 +223,7 @@ const Memory = () => {
               aspectRatio="16/9"
               caption="個人訓練方法概覽圖"
               contentKey="memory.personal.overview"
+              fallbackSrc={placeholderPersonal}
             />
           </div>
 
