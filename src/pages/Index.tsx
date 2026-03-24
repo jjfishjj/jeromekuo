@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout/Layout";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useSiteText } from "@/hooks/useSiteText";
 import placeholderProfile from "@/assets/placeholder-profile.jpg";
 
 const Index = () => {
@@ -57,7 +58,18 @@ const Index = () => {
     org: t(`testimonial.${i}.org`),
   }));
 
-  const domains = [t("hero.domain1"), t("hero.domain2"), t("hero.domain3")];
+  // Hero text from DB with i18n fallback
+  const heroRole1 = useSiteText("hero.role1", t("hero.role1"));
+  const heroRole2 = useSiteText("hero.role2", t("hero.role2"));
+  const heroTagline = useSiteText("hero.tagline", t("hero.tagline"));
+  const heroDomain1 = useSiteText("hero.domain1", t("hero.domain1"));
+  const heroDomain2 = useSiteText("hero.domain2", t("hero.domain2"));
+  const heroDomain3 = useSiteText("hero.domain3", t("hero.domain3"));
+  const heroCtaPrimary = useSiteText("hero.ctaPrimary", t("hero.ctaPrimary"));
+  const heroCtaSecondary = useSiteText("hero.ctaSecondary", t("hero.ctaSecondary"));
+  const heroGreeting = useSiteText("hero.greeting", t("hero.greeting"));
+
+  const domains = [heroDomain1, heroDomain2, heroDomain3];
   const stats = [
     { value: "4+", label: t("stats.research") },
     { value: "5", label: t("stats.languages") },
@@ -72,20 +84,20 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <span className="tag-pill opacity-0 animate-fade-in">
-                {t("hero.greeting")}
+                {heroGreeting}
               </span>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
                 <span className="whitespace-pre-line">
-                  {t("hero.role1")}
+                  {heroRole1}
                   <span className="text-primary"> ×</span>
                   {"\n"}
-                  <span className="text-primary">{t("hero.role2")}</span>
+                  <span className="text-primary">{heroRole2}</span>
                 </span>
               </h1>
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg opacity-0 animate-slide-up [animation-delay:0.2s]">
-                {t("hero.tagline")}
+                {heroTagline}
               </p>
 
               <div className="flex flex-wrap gap-2 opacity-0 animate-slide-up [animation-delay:0.25s]">
@@ -100,12 +112,12 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-3 opacity-0 animate-slide-up [animation-delay:0.3s]">
                 <Link to="/contact">
                   <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
-                    {t("hero.ctaPrimary")}
+                    {heroCtaPrimary}
                   </Button>
                 </Link>
                 <Link to="/memory">
                   <Button size="lg" variant="outline" className="border-border hover:border-primary hover:text-primary px-8">
-                    {t("hero.ctaSecondary")}
+                    {heroCtaSecondary}
                   </Button>
                 </Link>
               </div>
