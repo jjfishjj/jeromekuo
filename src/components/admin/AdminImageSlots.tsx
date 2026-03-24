@@ -16,14 +16,14 @@ interface ImageSlot {
 }
 
 const IMAGE_SLOTS = [
-  { key: "home.hero.profile", page: "home", section: "hero", label: "首頁 — 個人照片" },
-  { key: "memory.cover", page: "memory", section: "cover", label: "記憶頁 — 封面圖" },
-  { key: "memory.style.visual", page: "memory", section: "styles", label: "記憶頁 — 視覺學習" },
-  { key: "memory.style.auditory", page: "memory", section: "styles", label: "記憶頁 — 聽覺學習" },
-  { key: "memory.style.kinesthetic", page: "memory", section: "styles", label: "記憶頁 — 動覺學習" },
-  { key: "memory.style.readwrite", page: "memory", section: "styles", label: "記憶頁 — 讀寫學習" },
-  { key: "memory.crosstraining.video", page: "memory", section: "crosstraining", label: "記憶頁 — 混合學習影片" },
-  { key: "memory.personal.overview", page: "memory", section: "personal", label: "記憶頁 — 個人方法概覽" },
+  { key: "home.hero.profile", page: "home", section: "hero", label: "首頁 — 個人照片", size: "768 × 1024", ratio: "3:4" },
+  { key: "memory.cover", page: "memory", section: "cover", label: "記憶頁 — 封面圖", size: "1920 × 1080", ratio: "16:9" },
+  { key: "memory.style.visual", page: "memory", section: "styles", label: "記憶頁 — 視覺學習", size: "1200 × 800", ratio: "3:2" },
+  { key: "memory.style.auditory", page: "memory", section: "styles", label: "記憶頁 — 聽覺學習", size: "1200 × 800", ratio: "3:2" },
+  { key: "memory.style.kinesthetic", page: "memory", section: "styles", label: "記憶頁 — 動覺學習", size: "1200 × 800", ratio: "3:2" },
+  { key: "memory.style.readwrite", page: "memory", section: "styles", label: "記憶頁 — 讀寫學習", size: "1200 × 800", ratio: "3:2" },
+  { key: "memory.crosstraining.video", page: "memory", section: "crosstraining", label: "記憶頁 — 混合學習影片", size: "1920 × 1080", ratio: "16:9" },
+  { key: "memory.personal.overview", page: "memory", section: "personal", label: "記憶頁 — 個人方法概覽", size: "1920 × 1080", ratio: "16:9" },
 ];
 
 const AdminImageSlots = ({ userId }: { userId: string | undefined }) => {
@@ -136,9 +136,14 @@ const AdminImageSlots = ({ userId }: { userId: string | undefined }) => {
                   <span className="text-sm font-medium text-foreground">
                     {slotDef.label}
                   </span>
-                  <span className="text-xs text-muted-foreground font-mono">
-                    {slotDef.key}
-                  </span>
+                  <div className="text-right">
+                    <span className="text-xs text-muted-foreground font-mono block">
+                      {slotDef.key}
+                    </span>
+                    <span className="text-xs text-primary font-medium">
+                      建議尺寸: {slotDef.size} ({slotDef.ratio})
+                    </span>
+                  </div>
                 </div>
 
                 {hasImage ? (
