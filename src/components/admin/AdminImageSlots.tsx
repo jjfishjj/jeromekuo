@@ -136,9 +136,14 @@ const AdminImageSlots = ({ userId }: { userId: string | undefined }) => {
                   <span className="text-sm font-medium text-foreground">
                     {slotDef.label}
                   </span>
-                  <span className="text-xs text-muted-foreground font-mono">
-                    {slotDef.key}
-                  </span>
+                  <div className="text-right">
+                    <span className="text-xs text-muted-foreground font-mono block">
+                      {slotDef.key}
+                    </span>
+                    <span className="text-xs text-primary font-medium">
+                      建議尺寸: {slotDef.size} ({slotDef.ratio})
+                    </span>
+                  </div>
                 </div>
 
                 {hasImage ? (
