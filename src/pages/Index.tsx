@@ -79,15 +79,40 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center overflow-hidden py-12 md:py-0">
         <div className="section-container relative z-10 w-full">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Mobile: image first for visual impact */}
+            <div className="relative opacity-0 animate-slide-up [animation-delay:0.2s] order-first md:order-last">
+              <div className="relative max-w-[280px] sm:max-w-[320px] md:max-w-none mx-auto">
+                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} contentKey="home.hero.profile" fallbackSrc={placeholderProfile} />
+                <div className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 glass-card px-3 py-2 md:px-4 md:py-3 animate-float">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base md:text-lg">🧠</span>
+                    <div>
+                      <div className="text-[10px] md:text-xs text-muted-foreground">{t("photo.badge1.label")}</div>
+                      <div className="text-xs md:text-sm font-semibold text-primary">{t("photo.badge1.value")}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 glass-card px-3 py-2 md:px-4 md:py-3 animate-float [animation-delay:1.5s]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base md:text-lg">📊</span>
+                    <div>
+                      <div className="text-[10px] md:text-xs text-muted-foreground">{t("photo.badge2.label")}</div>
+                      <div className="text-xs md:text-sm font-semibold text-primary">{t("photo.badge2.value")}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-5 md:space-y-6 text-center md:text-left">
               <span className="tag-pill opacity-0 animate-fade-in">
                 {heroGreeting}
               </span>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
                 <span className="whitespace-pre-line">
                   {heroRole1}
                   <span className="text-primary"> ×</span>
@@ -96,63 +121,39 @@ const Index = () => {
                 </span>
               </h1>
 
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg opacity-0 animate-slide-up [animation-delay:0.2s]">
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg mx-auto md:mx-0 opacity-0 animate-slide-up [animation-delay:0.2s]">
                 {heroTagline}
               </p>
 
-              <div className="flex flex-wrap gap-2 opacity-0 animate-slide-up [animation-delay:0.25s]">
+              <div className="flex flex-wrap justify-center md:justify-start gap-2 opacity-0 animate-slide-up [animation-delay:0.25s]">
                 {domains.map((d) => (
-                  <span key={d} className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <span key={d} className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
                     {d}
                   </span>
                 ))}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 opacity-0 animate-slide-up [animation-delay:0.3s]">
-                <Link to="/contact">
-                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
+              <div className="flex flex-col sm:flex-row gap-3 opacity-0 animate-slide-up [animation-delay:0.3s] sm:justify-center md:justify-start">
+                <Link to="/contact" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
                     {heroCtaPrimary}
                   </Button>
                 </Link>
-                <Link to="/memory">
-                  <Button size="lg" variant="outline" className="border-border hover:border-primary hover:text-primary px-8">
+                <Link to="/memory" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto border-border hover:border-primary hover:text-primary px-8">
                     {heroCtaSecondary}
                   </Button>
                 </Link>
               </div>
 
-              <div className="flex gap-8 pt-6 border-t border-border/50 opacity-0 animate-slide-up [animation-delay:0.4s]">
+              <div className="flex justify-center md:justify-start gap-6 sm:gap-8 pt-6 border-t border-border/50 opacity-0 animate-slide-up [animation-delay:0.4s]">
                 {stats.map((s) => (
                   <div key={s.label}>
                     <div className="stat-number">{s.value}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
+                    <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{s.label}</div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div className="relative opacity-0 animate-slide-up [animation-delay:0.2s]">
-              <div className="relative">
-                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} contentKey="home.hero.profile" fallbackSrc={placeholderProfile} />
-                <div className="absolute -bottom-4 -left-4 glass-card px-4 py-3 animate-float">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">🧠</span>
-                    <div>
-                      <div className="text-xs text-muted-foreground">{t("photo.badge1.label")}</div>
-                      <div className="text-sm font-semibold text-primary">{t("photo.badge1.value")}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute -top-4 -right-4 glass-card px-4 py-3 animate-float [animation-delay:1.5s]">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">📊</span>
-                    <div>
-                      <div className="text-xs text-muted-foreground">{t("photo.badge2.label")}</div>
-                      <div className="text-sm font-semibold text-primary">{t("photo.badge2.value")}</div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -160,10 +161,10 @@ const Index = () => {
       </section>
 
       {/* Skills */}
-      <section className="py-24 border-t border-border/30">
+      <section className="py-16 md:py-24 border-t border-border/30">
         <div className="section-container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t("skills.title")}</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("skills.title")}</h2>
             <p className="text-muted-foreground">{t("skills.subtitle")}</p>
           </div>
 
@@ -203,10 +204,10 @@ const Index = () => {
       </section>
 
       {/* Services */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-16 md:py-24 bg-secondary/30">
         <div className="section-container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t("services.title")}</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("services.title")}</h2>
             <p className="text-muted-foreground">{t("services.subtitle")}</p>
           </div>
 
@@ -262,10 +263,10 @@ const Index = () => {
       </section>
 
       {/* Case Studies */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="section-container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t("cases.title")}</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("cases.title")}</h2>
             <p className="text-muted-foreground">{t("cases.subtitle")}</p>
           </div>
 
@@ -333,13 +334,13 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-16 md:py-24 bg-secondary/30">
         <div className="section-container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t("testimonials.title")}</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("testimonials.title")}</h2>
             <p className="text-muted-foreground">{t("testimonials.subtitle")}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {testimonials.map((tm, i) => (
               <div key={i} className="glass-card p-6">
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">"{tm.quote}"</p>
@@ -357,13 +358,13 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="section-container">
           <div className="max-w-3xl mx-auto text-center">
             <span className="tag-pill mb-6 inline-flex">{t("cta.badge")}</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 mt-4">{t("cta.title")}</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 mt-4">{t("cta.title")}</h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{t("cta.desc")}</p>
-            <div className="flex flex-wrap justify-center gap-8 mb-10">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 mb-10">
               {[
                 { icon: "🎯", title: t("cta.free"), desc: t("cta.freeDesc") },
                 { icon: "📋", title: t("cta.practical"), desc: t("cta.practicalDesc") },
