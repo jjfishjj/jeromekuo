@@ -340,7 +340,7 @@ const Index = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("testimonials.title")}</h2>
             <p className="text-muted-foreground">{t("testimonials.subtitle")}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {testimonials.map((tm, i) => (
               <div key={i} className="glass-card p-6">
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">"{tm.quote}"</p>
@@ -364,7 +364,7 @@ const Index = () => {
             <span className="tag-pill mb-6 inline-flex">{t("cta.badge")}</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 mt-4">{t("cta.title")}</h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">{t("cta.desc")}</p>
-            <div className="flex flex-wrap justify-center gap-8 mb-10">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 mb-10">
               {[
                 { icon: "🎯", title: t("cta.free"), desc: t("cta.freeDesc") },
                 { icon: "📋", title: t("cta.practical"), desc: t("cta.practicalDesc") },
