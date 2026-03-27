@@ -21,6 +21,7 @@ const navKeys = [
   { key: "nav.language", path: "/language" },
   { key: "nav.game", path: "/game" },
   { key: "nav.systems", path: "/systems" },
+  { key: "nav.videos", path: "/videos" },
   { key: "nav.contact", path: "/contact" },
 ];
 
