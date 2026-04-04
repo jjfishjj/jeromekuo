@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Upload, Trash2, ImageIcon } from "lucide-react";
+import { resizeImageIfNeeded, parseSize } from "@/utils/imageResize";
 
 interface ImageSlot {
   id: string;
@@ -69,12 +70,31 @@ const AdminImageSlots = ({ userId }: { userId: string | undefined }) => {
   const handleUpload = async (contentKey: string, file: File) => {
     setUploading(contentKey);
 
-    const fileExt = file.name.split(".").pop();
+    const slotDef = IMAGE_SLOTS.find((s) => s.key === contentKey);
+    let processedFile = file;
+
+    if (slotDef && file.type.startsWith("image/")) {
+      try {
+        const target = parseSize(slotDef.size);
+        const result = await resizeImageIfNeeded(file, target.width, target.height);
+        processedFile = result.file;
+        if (result.wasResized) {
+          toast({
+            title: "圖片已自動調整",
+            description: `原始 ${result.originalWidth}×${result.originalHeight} → 調整為 ${result.newWidth}×${result.newHeight}`,
+          });
+        }
+      } catch {
+        // If resize fails, upload original
+      }
+    }
+
+    const fileExt = processedFile.name.split(".").pop();
     const filePath = `content/${contentKey.replace(/\./g, "-")}-${Date.now()}.${fileExt}`;
 
     const { error: uploadError } = await supabase.storage
       .from("media")
-      .upload(filePath, file);
+      .upload(filePath, processedFile);
 
     if (uploadError) {
       toast({ title: "上傳失敗", description: uploadError.message, variant: "destructive" });
