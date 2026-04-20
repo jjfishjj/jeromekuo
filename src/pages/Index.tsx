@@ -167,9 +167,14 @@ const Index = () => {
               </div>
 
               <div className="flex justify-center md:justify-start gap-6 sm:gap-8 pt-6 border-t border-border/50 opacity-0 animate-slide-up [animation-delay:0.4s]">
-                {stats.map((s) => (
+                {stats.map((s, idx) => (
                   <div key={s.label}>
-                    <div className="stat-number">{s.value}</div>
+                    <div
+                      className="stat-number animate-number-pop"
+                      style={{ animationDelay: `${idx * 0.4}s` }}
+                    >
+                      {s.value}
+                    </div>
                     <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{s.label}</div>
                   </div>
                 ))}
