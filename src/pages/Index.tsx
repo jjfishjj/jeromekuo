@@ -126,16 +126,17 @@ const Index = () => {
             </div>
 
             <div className="space-y-5 md:space-y-6 text-center md:text-left">
-              <span className="tag-pill opacity-0 animate-fade-in">
+              <span className="tag-pill opacity-0 animate-fade-in animate-blink">
+                <Sparkles className="h-3 w-3 mr-1 inline" />
                 {heroGreeting}
               </span>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
-                <span className="whitespace-pre-line">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
+                <span className="whitespace-pre-line text-foreground">
                   {heroRole1}
                   <span className="text-primary"> ×</span>
                   {"\n"}
-                  <span className="text-primary">{heroRole2}</span>
+                  <span className="text-shimmer">{heroRole2}</span>
                 </span>
               </h1>
 
