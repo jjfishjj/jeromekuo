@@ -77,8 +77,25 @@ const Index = () => {
     { value: "∞", label: t("stats.continuous") },
   ];
 
+  // Marquee items - 跑馬燈內容
+  const marqueeItems = [
+    <><Sparkles className="h-4 w-4 text-primary" /><span>{t("hero.domain1")}</span></>,
+    <><Brain className="h-4 w-4 text-primary" /><span>{t("hero.domain2")}</span></>,
+    <><Globe className="h-4 w-4 text-primary" /><span>{t("hero.domain3")}</span></>,
+    <><Rocket className="h-4 w-4 text-primary" /><span>{t("services.title")}</span></>,
+    <><Heart className="h-4 w-4 text-primary" /><span>{t("cta.badge")}</span></>,
+    <><Award className="h-4 w-4 text-primary" /><span>{t("testimonials.title")}</span></>,
+    <><TrendingUp className="h-4 w-4 text-primary" /><span>{t("cases.title")}</span></>,
+    <><Zap className="h-4 w-4 text-primary" /><span>{t("skills.title")}</span></>,
+  ];
+
   return (
     <Layout>
+      {/* Top Marquee 跑馬燈 */}
+      <div className="border-b border-border/30 bg-secondary/40 py-3">
+        <Marquee items={marqueeItems} speed="normal" />
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center overflow-hidden py-12 md:py-0">
         <div className="section-container relative z-10 w-full">
