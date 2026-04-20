@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Sparkles, Zap, Brain, Globe, Rocket, Heart, Target, TrendingUp, Award } from "lucide-react";
 import { siteConfig } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Marquee } from "@/components/ui/Marquee";
 import { useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useSiteText } from "@/hooks/useSiteText";
@@ -76,8 +77,25 @@ const Index = () => {
     { value: "∞", label: t("stats.continuous") },
   ];
 
+  // Marquee items - 跑馬燈內容
+  const marqueeItems = [
+    <><Sparkles className="h-4 w-4 text-primary" /><span>{t("hero.domain1")}</span></>,
+    <><Brain className="h-4 w-4 text-primary" /><span>{t("hero.domain2")}</span></>,
+    <><Globe className="h-4 w-4 text-primary" /><span>{t("hero.domain3")}</span></>,
+    <><Rocket className="h-4 w-4 text-primary" /><span>{t("services.title")}</span></>,
+    <><Heart className="h-4 w-4 text-primary" /><span>{t("cta.badge")}</span></>,
+    <><Award className="h-4 w-4 text-primary" /><span>{t("testimonials.title")}</span></>,
+    <><TrendingUp className="h-4 w-4 text-primary" /><span>{t("cases.title")}</span></>,
+    <><Zap className="h-4 w-4 text-primary" /><span>{t("skills.title")}</span></>,
+  ];
+
   return (
     <Layout>
+      {/* Top Marquee 跑馬燈 */}
+      <div className="border-b border-border/30 bg-secondary/40 py-3">
+        <Marquee items={marqueeItems} speed="normal" />
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center overflow-hidden py-12 md:py-0">
         <div className="section-container relative z-10 w-full">
@@ -108,16 +126,17 @@ const Index = () => {
             </div>
 
             <div className="space-y-5 md:space-y-6 text-center md:text-left">
-              <span className="tag-pill opacity-0 animate-fade-in">
+              <span className="tag-pill opacity-0 animate-fade-in animate-blink">
+                <Sparkles className="h-3 w-3 mr-1 inline" />
                 {heroGreeting}
               </span>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
-                <span className="whitespace-pre-line">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
+                <span className="whitespace-pre-line text-foreground">
                   {heroRole1}
                   <span className="text-primary"> ×</span>
                   {"\n"}
-                  <span className="text-primary">{heroRole2}</span>
+                  <span className="text-shimmer">{heroRole2}</span>
                 </span>
               </h1>
 
@@ -148,9 +167,14 @@ const Index = () => {
               </div>
 
               <div className="flex justify-center md:justify-start gap-6 sm:gap-8 pt-6 border-t border-border/50 opacity-0 animate-slide-up [animation-delay:0.4s]">
-                {stats.map((s) => (
+                {stats.map((s, idx) => (
                   <div key={s.label}>
-                    <div className="stat-number">{s.value}</div>
+                    <div
+                      className="stat-number animate-number-pop"
+                      style={{ animationDelay: `${idx * 0.4}s` }}
+                    >
+                      {s.value}
+                    </div>
                     <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{s.label}</div>
                   </div>
                 ))}
@@ -263,20 +287,36 @@ const Index = () => {
       </section>
 
       {/* Case Studies */}
-      <section className="py-16 md:py-24">
-        <div className="section-container">
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        {/* decorative gradient blobs */}
+        <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+
+        <div className="section-container relative">
           <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("cases.title")}</h2>
+            <span className="tag-pill mb-4 inline-flex animate-blink">
+              <Award className="h-3 w-3 mr-1 inline" />
+              {t("cases.title")}
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+              <span className="text-shimmer">{t("cases.title")}</span>
+            </h2>
             <p className="text-muted-foreground">{t("cases.subtitle")}</p>
           </div>
 
           <div className="max-w-5xl mx-auto space-y-8">
             {cases.map((cs, i) => (
-              <Link key={i} to={cs.link} className="block glass-card p-8 group hover:border-primary/30 transition-all">
+              <Link
+                key={i}
+                to={cs.link}
+                className="case-card block glass-card p-8 group hover:border-primary/40 transition-all hover:-translate-y-1 duration-500"
+              >
                 <div className="flex flex-col md:flex-row gap-8">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-2xl">{cs.icon}</span>
+                    <div className="flex items-center gap-3 mb-4 flex-wrap">
+                      <span className="text-3xl group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 inline-block">
+                        {cs.icon}
+                      </span>
                       <span className="tag-pill">{cs.tag}</span>
                       <span className="text-xs text-muted-foreground">{cs.category}</span>
                     </div>
@@ -285,35 +325,44 @@ const Index = () => {
                     </h3>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {cs.tags.map((tag) => (
-                        <span key={tag} className="text-xs px-2 py-1 rounded-md bg-secondary text-muted-foreground">{tag}</span>
+                        <span
+                          key={tag}
+                          className="text-xs px-2 py-1 rounded-md bg-secondary text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors"
+                        >
+                          {tag}
+                        </span>
                       ))}
                     </div>
                     <div className="space-y-3">
-                      <div className="flex items-start gap-2">
-                        <span className="text-xs font-medium text-destructive/80 mt-0.5">⚠️</span>
+                      <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/5 border border-destructive/10">
+                        <span className="text-base mt-0.5">⚠️</span>
                         <div>
-                          <span className="text-xs font-medium text-muted-foreground">{t("cases.challengeLabel")}</span>
-                          <p className="text-sm text-muted-foreground">{cs.challenge}</p>
+                          <span className="text-xs font-medium text-destructive/80">{t("cases.challengeLabel")}</span>
+                          <p className="text-sm text-muted-foreground mt-1">{cs.challenge}</p>
                         </div>
                       </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-xs font-medium text-primary mt-0.5">✅</span>
+                      <div className="flex items-start gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                        <span className="text-base mt-0.5">✅</span>
                         <div>
-                          <span className="text-xs font-medium text-muted-foreground">{t("cases.solutionLabel")}</span>
-                          <p className="text-sm text-foreground/80">{cs.solution}</p>
+                          <span className="text-xs font-medium text-primary">{t("cases.solutionLabel")}</span>
+                          <p className="text-sm text-foreground/80 mt-1">{cs.solution}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="flex md:flex-col gap-6 md:gap-4 md:w-48 md:border-l md:border-border/50 md:pl-8 items-center md:justify-center">
-                    {cs.results.map((r) => (
-                      <div key={r.label} className="text-center">
-                        <div className="text-2xl font-bold text-primary">{r.value}</div>
-                        <div className="text-xs text-muted-foreground">{r.label}</div>
+                    {cs.results.map((r, ri) => (
+                      <div
+                        key={r.label}
+                        className="text-center group-hover:scale-105 transition-transform duration-500"
+                        style={{ transitionDelay: `${ri * 80}ms` }}
+                      >
+                        <div className="text-3xl font-bold text-shimmer">{r.value}</div>
+                        <div className="text-xs text-muted-foreground mt-1">{r.label}</div>
                       </div>
                     ))}
-                    <span className="text-sm font-medium text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {t("cases.learnMore")} <ChevronRight className="h-4 w-4" />
+                    <span className="text-sm font-medium text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                      {t("cases.learnMore")} <ChevronRight className="h-4 w-4 animate-pulse" />
                     </span>
                   </div>
                 </div>
@@ -322,7 +371,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <div className="glass-card inline-block p-8 max-w-lg">
+            <div className="glass-card inline-block p-8 max-w-lg animate-glow">
               <h3 className="text-lg font-semibold text-foreground mb-2">{t("cases.ctaTitle")}</h3>
               <p className="text-sm text-muted-foreground mb-4">{t("cases.ctaDesc")}</p>
               <Link to="/contact">
