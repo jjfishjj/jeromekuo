@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Sparkles, Zap, Brain, Globe, Rocket, Heart, Target, TrendingUp, Award } from "lucide-react";
 import { siteConfig } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Marquee } from "@/components/ui/Marquee";
 import { useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useSiteText } from "@/hooks/useSiteText";
