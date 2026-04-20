@@ -121,7 +121,7 @@ const AdminDashboard = () => {
   const handleUpdateContent = async (id: string, field: string, value: string) => {
     await supabase
       .from("site_content")
-      .update({ [field]: value })
+      .update({ [field]: value } as never)
       .eq("id", id);
     fetchContent();
   };
