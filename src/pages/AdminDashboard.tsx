@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
-import { Trash2, Upload, LogOut, Image, FileText, MapPin, Type } from "lucide-react";
+import { Trash2, Upload, LogOut, Image, FileText, MapPin, Type, AlertCircle } from "lucide-react";
 import AdminImageSlots from "@/components/admin/AdminImageSlots";
 import AdminTextSlots from "@/components/admin/AdminTextSlots";
 
@@ -175,6 +175,24 @@ const AdminDashboard = () => {
       </header>
 
       <div className="max-w-6xl mx-auto p-6">
+        {/* Internal admin-only reminders (hidden from public site) */}
+        <div className="mb-6 space-y-2">
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-500/10 border border-amber-500/20">
+            <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+            <div className="text-sm text-amber-800 dark:text-amber-200">
+              <p className="font-medium mb-0.5">📌 待補充：成長日誌 GitHub 連結</p>
+              <p>目前 GitHub Repo 顯示 404，可能為私有專案或已更名。請補充正確連結或專案細節（src/data/siteData.ts → siteConfig.github）。</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-500/10 border border-amber-500/20">
+            <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+            <div className="text-sm text-amber-800 dark:text-amber-200">
+              <p className="font-medium mb-0.5">📌 待確認：語言頁清單</p>
+              <p>語言清單基於 Gamma 文件推斷，請確認或補充實際語言能力與等級。</p>
+            </div>
+          </div>
+        </div>
+
         <Tabs defaultValue="text">
           <TabsList className="mb-6">
             <TabsTrigger value="text" className="gap-1.5">
