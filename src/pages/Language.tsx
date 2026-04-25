@@ -226,17 +226,7 @@ const Language = () => {
         </div>
       </section>
 
-      {/* Note */}
-      <section className="py-12">
-        <div className="section-container">
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 max-w-3xl mx-auto">
-            <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-amber-800 dark:text-amber-200">
-              {languageData.note}
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Warning note hidden from public — visible only in admin dashboard */}
 
       {/* Philosophy */}
       <section className="py-20 bg-muted/30">

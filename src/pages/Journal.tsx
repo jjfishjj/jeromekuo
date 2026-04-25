@@ -118,17 +118,7 @@ const Journal = () => {
         </div>
       </section>
 
-      {/* Warning Note */}
-      <section className="py-6 border-b border-border/50">
-        <div className="section-container">
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-500/10 border border-amber-500/20">
-            <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-amber-800 dark:text-amber-200">
-              {journalProject.note}
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Warning note hidden from public — visible only in admin dashboard */}
 
       {/* Core Traits Section */}
       <section className="py-16 border-b border-border/50">

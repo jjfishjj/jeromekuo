@@ -109,11 +109,11 @@ const Memory = () => {
                     {style.description}
                   </p>
 
-                  {/* Inline media placeholder */}
+                  {/* Inline media placeholder — all images for consistency */}
                   <MediaPlaceholder
-                    type={idx % 2 === 0 ? "image" : "video"}
+                    type="image"
                     aspectRatio="3/2"
-                    caption={`${style.nameZh}學習情境示意${idx % 2 === 1 ? "影片" : "圖片"}`}
+                    caption={`${style.nameZh}學習情境示意圖`}
                     contentKey={`memory.style.${style.id}`}
                     fallbackSrc={styleFallbacks[style.id]}
                   />
