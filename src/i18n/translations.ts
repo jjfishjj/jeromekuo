@@ -9,6 +9,7 @@ const zh = {
   "nav.game": "遊戲",
   "nav.systems": "系統思維",
   "nav.videos": "影片",
+  "nav.lectures": "講座",
   "nav.contact": "聯絡",
   "nav.bookNow": "預約諮詢",
 
@@ -264,6 +265,7 @@ const en: typeof zh = {
   "nav.game": "Game",
   "nav.systems": "Systems Thinking",
   "nav.videos": "Videos",
+  "nav.lectures": "Lectures",
   "nav.contact": "Contact",
   "nav.bookNow": "Book Now",
 
@@ -502,6 +504,7 @@ const es: typeof zh = {
   "nav.game": "Juegos",
   "nav.systems": "Pensamiento Sistémico",
   "nav.videos": "Videos",
+  "nav.lectures": "Charlas",
   "nav.contact": "Contacto",
   "nav.bookNow": "Reservar",
 
@@ -740,6 +743,7 @@ const he: typeof zh = {
   "nav.game": "משחקים",
   "nav.systems": "חשיבה מערכתית",
   "nav.videos": "סרטונים",
+  "nav.lectures": "הרצאות",
   "nav.contact": "צור קשר",
   "nav.bookNow": "הזמן עכשיו",
 
@@ -978,6 +982,7 @@ const ko: typeof zh = {
   "nav.game": "게임",
   "nav.systems": "시스템 사고",
   "nav.videos": "영상",
+  "nav.lectures": "강의",
   "nav.contact": "연락처",
   "nav.bookNow": "예약하기",
 
@@ -1216,6 +1221,7 @@ const fr: typeof zh = {
   "nav.game": "Jeux",
   "nav.systems": "Pensée Systémique",
   "nav.videos": "Vidéos",
+  "nav.lectures": "Conférences",
   "nav.contact": "Contact",
   "nav.bookNow": "Réserver",
 

@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Videos from "./pages/Videos";
+import Lectures from "./pages/Lectures";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/systems" element={<Systems />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/videos" element={<Videos />} />
+            <Route path="/lectures" element={<Lectures />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

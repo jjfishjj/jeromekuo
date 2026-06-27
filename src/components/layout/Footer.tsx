@@ -9,6 +9,7 @@ const navKeys = [
   { key: "nav.language", path: "/language" },
   { key: "nav.game", path: "/game" },
   { key: "nav.systems", path: "/systems" },
+  { key: "nav.lectures", path: "/lectures" },
 ];
 
 export const Footer = () => {
