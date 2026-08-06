@@ -32,7 +32,7 @@ Browser
 
 ## 本機執行
 
-需求：Node.js 20 以上與 npm。
+需求：Node.js 22 以上與 npm（目前 Supabase client 相依套件要求 Node.js 22）。
 
 ```bash
 git clone https://github.com/jjfishjj/jeromekuo.git
