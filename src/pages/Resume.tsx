@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 
 type Lang = "zh" | "en";
+type RoleTrack = "product" | "solution" | "devrel";
 type Localized = { zh: string; en: string };
 const tx = (value: Localized, lang: Lang) => value[lang];
 
@@ -25,10 +26,18 @@ const strengths = [
 ];
 
 const nvidiaTracks = [
-  { title: "AI PRODUCT / TPM", fit: "PRIMARY FIT", body: { zh: "AI 產品生命週期、資料驅動決策、跨部門推進，以及對 GPU／推論成本與硬體生態的產品意識。", en: "AI product lifecycle, data-driven decisions, cross-functional delivery, and product awareness of GPU economics and the hardware ecosystem." } },
-  { title: "SOLUTION ARCHITECTURE", fit: "STRONG ADJACENCY", body: { zh: "能把生成式 AI 工具、原型與客戶需求轉成可溝通的解決方案；下一步聚焦 NIM、RAG 與推論服務整合。", en: "Turns GenAI tools, prototypes, and customer needs into communicable solutions; next focus: NIM, RAG, and inference-service integration." } },
-  { title: "TECHNICAL MARKETING / DEVREL", fit: "DIFFERENTIATED FIT", body: { zh: "具國際展會、獎項、workshop、產品敘事與雙語內容經驗，適合連結技術、社群與市場。", en: "International events, awards, workshops, product storytelling, and bilingual content experience connect technology, community, and market." } },
+  { id: "product" as RoleTrack, title: "AI PRODUCT / TPM", fit: "PRIMARY FIT", headline: { zh:"把 AI 能力轉化為可衡量的產品成果", en:"Turning AI capabilities into measurable product outcomes" }, body: { zh: "AI 產品生命週期、資料驅動決策、跨部門推進，以及對 GPU／推論成本與硬體生態的產品意識。", en: "AI product lifecycle ownership, data-informed prioritization, cross-functional execution, and fluency in GPU economics and inference trade-offs." } },
+  { id: "solution" as RoleTrack, title: "SOLUTION ARCHITECT", fit: "STRONG ADJACENCY", headline: { zh:"連結客戶問題、原型與可部署架構", en:"Connecting customer problems, prototypes, and deployable architectures" }, body: { zh: "能把生成式 AI 工具、原型與客戶需求轉成可溝通的解決方案；目前聚焦 NIM、RAG 與推論服務整合。", en: "Translate customer requirements and GenAI prototypes into clear solution narratives, with current focus on NIM, RAG, and inference-service integration." } },
+  { id: "devrel" as RoleTrack, title: "TECHNICAL MARKETING / DEVREL", fit: "DIFFERENTIATED FIT", headline: { zh:"讓技術被理解、採用並形成社群影響力", en:"Making technology understandable, adoptable, and community-driven" }, body: { zh: "具國際展會、獎項、workshop、產品敘事與雙語內容經驗，適合連結技術、社群與市場。", en: "Bring together international events, workshops, bilingual technical storytelling, and product marketing to connect developers, technology, and market adoption." } },
 ];
+
+const projectCases = [
+  { status:{zh:"建置中",en:"IN PROGRESS"}, title:"NIM + RAG KNOWLEDGE ASSISTANT", tools:"NVIDIA NIM · RAG · MemoLingua", body:{zh:"將 MemoLingua 語言學習內容轉成具來源引用的問答流程，驗證延遲、答案品質與產品採用情境。",en:"A citation-grounded learning assistant for MemoLingua, designed to evaluate latency, answer quality, and product adoption scenarios."}, roles:["product","solution"] as RoleTrack[] },
+  { status:{zh:"計畫中",en:"PLANNED"}, title:"RAPIDS RFM BENCHMARK", tools:"cuDF · cuML · Python · RFM", body:{zh:"把既有玩家 RFM／留存分析流程移植到 GPU，對照 pandas 與 cuDF 的處理時間並發表雙語 benchmark。",en:"A bilingual benchmark migrating an existing player RFM and retention workflow from pandas to GPU-accelerated cuDF."}, roles:["product","solution","devrel"] as RoleTrack[] },
+  { status:{zh:"概念驗證",en:"PROOF OF CONCEPT"}, title:"JETSON EDGE AI EXPERIENCE", tools:"Jetson Nano · Computer Vision · DLI", body:{zh:"延伸已完成的 Jetson Nano DLI 訓練，設計可在邊緣裝置示範的互動辨識體驗與產品敘事。",en:"Extending completed Jetson Nano DLI training into an edge-AI interaction concept with a clear demo and product narrative."}, roles:["solution","devrel"] as RoleTrack[] },
+];
+
+const trackEvent = (name: string, properties: Record<string, string> = {}) => window.dispatchEvent(new CustomEvent("resume:analytics", { detail: { name, ...properties } }));
 
 const jobs = [
   { year: "2025 — NOW", company: "CodeNet", role: { zh: "專案經理", en: "Project Manager" }, location: { zh: "台北，台灣", en: "Taipei, Taiwan" }, intro: { zh: "負責 pei.com.tw 校園社群與 love.pei.com.tw 配對平台的產品規劃、資料串接與開發協作。", en: "Lead product planning, data integrations, and development coordination for pei.com.tw campus community and love.pei.com.tw matching products." }, points: [
@@ -96,12 +105,28 @@ export default function Resume() {
     const requested = new URLSearchParams(window.location.search).get("lang");
     return requested === "en" || requested === "zh" ? requested : (localStorage.getItem("resume-lang") as Lang) || "zh";
   });
+  const [role, setRole] = useState<RoleTrack>(() => {
+    const requested = new URLSearchParams(window.location.search).get("role");
+    return requested === "solution" || requested === "devrel" ? requested : "product";
+  });
   const c = <K extends keyof typeof copy>(key: K) => tx(copy[key] as Localized, lang);
-  const setLanguage = (next: Lang) => { setLang(next); localStorage.setItem("resume-lang", next); };
+  const setLanguage = (next: Lang) => { setLang(next); localStorage.setItem("resume-lang", next); trackEvent("language_change", { language: next }); };
+  const setRoleTrack = (next: RoleTrack) => {
+    setRole(next);
+    const url = new URL(window.location.href);
+    url.searchParams.set("role", next);
+    url.searchParams.set("lang", lang);
+    window.history.replaceState({}, "", url);
+    trackEvent("role_view", { role: next, language: lang });
+  };
 
   useEffect(() => {
     document.documentElement.lang = lang === "zh" ? "zh-Hant" : "en";
     document.title = lang === "zh" ? "Jerome Kuo — AI 產品與專案經理" : "Jerome Kuo — AI Product & Project Manager";
+    const description = lang === "zh" ? "Jerome Kuo 的 AI 產品、解決方案架構與技術行銷履歷，橫跨生成式 AI、數據分析、GPU 生態與半導體供應鏈。" : "Jerome Kuo is an AI product and program leader spanning GenAI, analytics, GPU ecosystems, technical storytelling, and semiconductor supply chains.";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", description);
   }, [lang]);
 
   const nav = [["about", tx(copy.nav.about,lang)], ["strengths",tx(copy.nav.strengths,lang)], ["ai-fit",tx(copy.nav.fit,lang)], ["experience",tx(copy.nav.experience,lang)], ["education",tx(copy.nav.education,lang)]];
@@ -128,7 +153,9 @@ export default function Resume() {
 
     <section id="strengths" className="resume-section resume-strengths"><div className="resume-heading-row"><div><div className="resume-section-label">02 / CORE STRENGTHS</div><h2>{c("strengthTitle")}</h2></div><p>{c("strengthSub")}</p></div><div className="resume-strength-grid">{strengths.map(s => {const Icon=s.icon;return <article key={s.eyebrow}><div className="resume-card-top"><span>{s.eyebrow}</span><Icon/></div><h3>{tx(s.title,lang)}</h3><p>{tx(s.text,lang)}</p></article>})}</div></section>
 
-    <section id="ai-fit" className="resume-section resume-ai-fit"><div className="resume-heading-row"><div><div className="resume-section-label">03 / NVIDIA + AI POSITIONING</div><h2>{c("fitTitle")}</h2></div><p>{c("fitSub")}</p></div><div className="resume-fit-grid">{nvidiaTracks.map(track => <article key={track.title}><span>{track.fit}</span><h3>{track.title}</h3><p>{tx(track.body,lang)}</p></article>)}</div><div className="resume-dli"><div><Cpu/><span>{c("dli")}</span></div><ul><li>{lang === "zh" ? "深度學習基礎理論與實踐" : "Fundamentals of Deep Learning"}</li><li>{lang === "zh" ? "快速開發 LLM 應用程式" : "Rapid Application Development with LLMs"}</li><li>{lang === "zh" ? "Jetson Nano AI 應用開發" : "AI Development with Jetson Nano"}</li></ul></div></section>
+    <section id="ai-fit" className="resume-section resume-ai-fit"><div className="resume-heading-row"><div><div className="resume-section-label">03 / NVIDIA + AI POSITIONING</div><h2>{c("fitTitle")}</h2></div><p>{c("fitSub")}</p></div><div className="resume-role-picker" role="group" aria-label={lang === "zh" ? "選擇職缺版本" : "Choose a role version"}>{nvidiaTracks.map(track => <button key={track.id} className={role === track.id ? "active" : ""} onClick={() => setRoleTrack(track.id)}><small>{track.fit}</small><strong>{track.title}</strong></button>)}</div><div className="resume-role-focus"><span>{lang === "zh" ? "目前版本" : "CURRENT VERSION"}</span><h3>{tx(nvidiaTracks.find(track => track.id === role)!.headline,lang)}</h3><p>{tx(nvidiaTracks.find(track => track.id === role)!.body,lang)}</p></div><div className="resume-dli"><div><Cpu/><span>{c("dli")}</span></div><ul><li>{lang === "zh" ? "深度學習基礎理論與實踐" : "Fundamentals of Deep Learning"}</li><li>{lang === "zh" ? "快速開發 LLM 應用程式" : "Rapid Application Development with LLMs"}</li><li>{lang === "zh" ? "Jetson Nano AI 應用開發" : "AI Development with Jetson Nano"}</li></ul></div></section>
+
+    <section className="resume-section resume-cases"><div className="resume-heading-row"><div><div className="resume-section-label">04 / NVIDIA PROJECT ROADMAP</div><h2>{lang === "zh" ? "從學習證明，走向可展示案例。" : "From learning credentials to demonstrable work."}</h2></div><p>{lang === "zh" ? "案例狀態公開標示；完成後將補上原始碼、架構與 benchmark。" : "Statuses are explicit. Source code, architecture, and benchmarks will be added as each project ships."}</p></div><div className="resume-case-grid">{projectCases.filter(item => item.roles.includes(role)).map(item => <article key={item.title}><div><span>{tx(item.status,lang)}</span><small>{item.tools}</small></div><h3>{item.title}</h3><p>{tx(item.body,lang)}</p></article>)}</div></section>
 
     <section id="experience" className="resume-section resume-experience"><div className="resume-heading-row"><div><div className="resume-section-label">04 / EXPERIENCE</div><h2>{c("experienceTitle")}</h2></div><p>{c("experienceSub")}</p></div><div className="resume-job-list">{jobs.map((job,i)=><article className="resume-job" key={job.company}><div className="resume-job-year">{job.year}</div><div className="resume-job-main"><div className="resume-job-title"><div><span>0{i+1}</span><h3>{job.company}</h3></div><p>{tx(job.role,lang)}</p></div><p className="resume-job-intro">{tx(job.intro,lang)}</p><ul>{job.points.map(p=><li key={p.en}>{tx(p,lang)}</li>)}</ul></div><div className="resume-job-place">{tx(job.location,lang)&&<><MapPin/>{tx(job.location,lang)}</>}</div></article>)}</div></section>
 
