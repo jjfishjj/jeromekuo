@@ -1,6 +1,14 @@
 {
   "rewrites": [
     { "source": "/resume", "destination": "/resume.html" },
+    { "source": "/memory", "destination": "/memory.html" },
+    { "source": "/journal", "destination": "/journal.html" },
+    { "source": "/language", "destination": "/language.html" },
+    { "source": "/game", "destination": "/game.html" },
+    { "source": "/systems", "destination": "/systems.html" },
+    { "source": "/videos", "destination": "/videos.html" },
+    { "source": "/lectures", "destination": "/lectures.html" },
+    { "source": "/contact", "destination": "/contact.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
