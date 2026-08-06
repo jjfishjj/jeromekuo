@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const textCache = new Map<string, string>();
 let allFetched = false;
+let fetchPromise: Promise<void> | null = null;
 
 const fetchAllTexts = async () => {
   if (allFetched) return;
@@ -20,8 +21,14 @@ const fetchAllTexts = async () => {
   }
 };
 
-// Pre-fetch on module load
-const prefetchPromise = fetchAllTexts();
+const ensureTextsFetched = () => {
+  if (!fetchPromise) {
+    fetchPromise = fetchAllTexts().finally(() => {
+      fetchPromise = null;
+    });
+  }
+  return fetchPromise;
+};
 
 export const useSiteText = (contentKey: string, fallback: string): string => {
   const [value, setValue] = useState<string>(textCache.get(contentKey) ?? fallback);
@@ -31,7 +38,7 @@ export const useSiteText = (contentKey: string, fallback: string): string => {
       setValue(textCache.get(contentKey)!);
       return;
     }
-    prefetchPromise.then(() => {
+    ensureTextsFetched().then(() => {
       if (textCache.has(contentKey)) {
         setValue(textCache.get(contentKey)!);
       }
@@ -44,4 +51,5 @@ export const useSiteText = (contentKey: string, fallback: string): string => {
 export const invalidateSiteTextCache = () => {
   textCache.clear();
   allFetched = false;
+  fetchPromise = null;
 };
