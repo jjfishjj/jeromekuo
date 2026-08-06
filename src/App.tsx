@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import Index from "./pages/Index";
+import RouteMetadata from "@/components/RouteMetadata";
 
 const Memory = lazy(() => import("./pages/Memory"));
 const Journal = lazy(() => import("./pages/Journal"));
@@ -29,6 +30,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <RouteMetadata />
           <Suspense fallback={<div className="flex min-h-screen items-center justify-center text-muted-foreground">載入中…</div>}>
             <Routes>
               <Route path="/" element={<Index />} />
