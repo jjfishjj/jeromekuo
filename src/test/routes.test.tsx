@@ -39,4 +39,10 @@ describe("application routes", () => {
     render(<App />);
     await waitFor(() => expect(screen.getByRole("heading", { name: "Resume summary route" })).toBeInTheDocument());
   });
+
+  it("keeps the legacy resume summary route working", async () => {
+    window.history.pushState({}, "", "/resume/summary");
+    render(<App />);
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Resume summary route" })).toBeInTheDocument());
+  });
 });

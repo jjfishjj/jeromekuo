@@ -45,6 +45,7 @@ const App = () => (
               <Route path="/lectures" element={<Lectures />} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/resume-summary" element={<ResumeSummary />} />
+              <Route path="/resume/summary" element={<ResumeSummary />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="*" element={<NotFound />} />
