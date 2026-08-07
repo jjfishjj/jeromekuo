@@ -160,7 +160,7 @@ const RubikPuzzle = () => {
   };
 
   const shuffle = () => {
-    let newCube = cloneCube(cube);
+    const newCube = cloneCube(cube);
     const operations = [
       () => { newCube.top = rotateFaceClockwise(newCube.top); rotateTop(true); },
       () => { rotateTop(false); },

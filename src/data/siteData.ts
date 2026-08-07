@@ -6,8 +6,8 @@ export const siteConfig = {
   title: "Learning Systems · Memory Design · Applied Reflection",
   description: "跨領域創作者與系統設計者，結合學習科學、行為反思、語言與遊戲設計、數據分析與實作能力。",
   github: "https://github.com/jjfishjj",
-  email: "TODO: 請補充 Email",
-  bookingUrl: "#contact", // 預約連結，可替換為 LINE / Calendly 等
+  email: "",
+  bookingUrl: "", // 可替換為 LINE / Calendly 等完整網址
 };
 
 export const heroData = {
@@ -377,7 +377,7 @@ export const contactData = {
     "跨語言學習經驗分享",
   ],
   github: "https://github.com/jjfishjj",
-  email: "TODO: 請補充 Email",
+  email: "",
 };
 
 export const navigation = [

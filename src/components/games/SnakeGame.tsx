@@ -6,8 +6,8 @@ type Position = { x: number; y: number };
 type Direction = "UP" | "DOWN" | "LEFT" | "RIGHT";
 
 const GRID_SIZE = 20;
-const CELL_SIZE = 20;
 const INITIAL_SPEED = 150;
+const CELL_PERCENT = 100 / GRID_SIZE;
 
 const SnakeGame = () => {
   const [snake, setSnake] = useState<Position[]>([{ x: 10, y: 10 }]);
@@ -28,7 +28,7 @@ const SnakeGame = () => {
     return newFood;
   }, []);
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     const initialSnake = [{ x: 10, y: 10 }];
     setSnake(initialSnake);
     setFood(generateFood(initialSnake));
@@ -36,14 +36,14 @@ const SnakeGame = () => {
     directionRef.current = "RIGHT";
     setScore(0);
     setGameState("idle");
-  };
+  }, [generateFood]);
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     if (gameState === "gameover") {
       resetGame();
     }
     setGameState("playing");
-  };
+  }, [gameState, resetGame]);
 
   const togglePause = () => {
     setGameState((prev) => (prev === "playing" ? "paused" : "playing"));
@@ -88,7 +88,7 @@ const SnakeGame = () => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [gameState]);
+  }, [gameState, startGame]);
 
   // Game loop
   useEffect(() => {
@@ -154,7 +154,7 @@ const SnakeGame = () => {
               <Play className="h-4 w-4 mr-1" /> {gameState === "gameover" ? "Retry" : "Start"}
             </Button>
           )}
-          <Button variant="ghost" size="sm" onClick={resetGame}>
+          <Button variant="ghost" size="sm" onClick={resetGame} aria-label="Reset game">
             <RotateCcw className="h-4 w-4" />
           </Button>
         </div>
@@ -162,11 +162,7 @@ const SnakeGame = () => {
 
       {/* Game Board */}
       <div
-        className="relative border-2 border-border rounded-lg overflow-hidden bg-background/50"
-        style={{
-          width: GRID_SIZE * CELL_SIZE,
-          height: GRID_SIZE * CELL_SIZE,
-        }}
+        className="relative aspect-square w-full max-w-[400px] border-2 border-border rounded-lg overflow-hidden bg-background/50"
       >
         {/* Grid background */}
         <div
@@ -176,7 +172,7 @@ const SnakeGame = () => {
               linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
               linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)
             `,
-            backgroundSize: `${CELL_SIZE}px ${CELL_SIZE}px`,
+            backgroundSize: `${CELL_PERCENT}% ${CELL_PERCENT}%`,
           }}
         />
 
@@ -188,11 +184,11 @@ const SnakeGame = () => {
               index === 0 ? "bg-accent" : "bg-accent/70"
             }`}
             style={{
-              left: segment.x * CELL_SIZE,
-              top: segment.y * CELL_SIZE,
-              width: CELL_SIZE - 2,
-              height: CELL_SIZE - 2,
-              margin: 1,
+              left: `${segment.x * CELL_PERCENT}%`,
+              top: `${segment.y * CELL_PERCENT}%`,
+              width: `${CELL_PERCENT}%`,
+              height: `${CELL_PERCENT}%`,
+              transform: "scale(0.9)",
             }}
           />
         ))}
@@ -201,10 +197,11 @@ const SnakeGame = () => {
         <div
           className="absolute rounded-full bg-destructive animate-pulse"
           style={{
-            left: food.x * CELL_SIZE + 2,
-            top: food.y * CELL_SIZE + 2,
-            width: CELL_SIZE - 4,
-            height: CELL_SIZE - 4,
+            left: `${food.x * CELL_PERCENT}%`,
+            top: `${food.y * CELL_PERCENT}%`,
+            width: `${CELL_PERCENT}%`,
+            height: `${CELL_PERCENT}%`,
+            transform: "scale(0.8)",
           }}
         />
 

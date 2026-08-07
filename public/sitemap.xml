@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://jeromekuo.vercel.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/resume</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/memory</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/journal</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/language</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/game</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/systems</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/videos</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/lectures</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jeromekuo.vercel.app/contact</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+</urlset>

@@ -83,13 +83,20 @@ export const Footer = () => {
                 <Github className="h-4 w-4" />
                 GitHub
               </a>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Mail className="h-4 w-4" />
-                Email
-              </a>
+              {siteConfig.email ? (
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Mail className="h-4 w-4" />
+                  Email
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-2 text-sm text-muted-foreground/70" title="Email 尚未設定">
+                  <Mail className="h-4 w-4" />
+                  Email（待補）
+                </span>
+              )}
             </div>
           </div>
         </div>

@@ -63,18 +63,32 @@ const Contact = () => {
                   GitHub — @jjfishjj
                 </Button>
               </a>
-              <a href={`mailto:${contactData.email}`} className="block">
-                <Button size="lg" variant="outline" className="w-full justify-start border-border hover:border-primary hover:text-primary">
+              {contactData.email ? (
+                <a href={`mailto:${contactData.email}`} className="block">
+                  <Button size="lg" variant="outline" className="w-full justify-start border-border hover:border-primary hover:text-primary">
+                    <Mail className="mr-3 h-5 w-5" />
+                    Email — {contactData.email}
+                  </Button>
+                </a>
+              ) : (
+                <Button size="lg" variant="outline" className="w-full justify-start" disabled>
                   <Mail className="mr-3 h-5 w-5" />
-                  Email — {contactData.email.includes("TODO") ? t("contact.emailPending") : contactData.email}
+                  {t("contact.emailPending")}
                 </Button>
-              </a>
-              <a href={siteConfig.bookingUrl} className="block">
-                <Button size="lg" className="w-full justify-start bg-primary text-primary-foreground hover:bg-primary/90">
+              )}
+              {siteConfig.bookingUrl ? (
+                <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" className="block">
+                  <Button size="lg" className="w-full justify-start bg-primary text-primary-foreground hover:bg-primary/90">
+                    <MessageCircle className="mr-3 h-5 w-5" />
+                    {t("contact.bookCall")}
+                  </Button>
+                </a>
+              ) : (
+                <Button size="lg" className="w-full justify-start" disabled>
                   <MessageCircle className="mr-3 h-5 w-5" />
-                  {t("contact.bookCall")}
+                  {t("contact.bookCall")}（待設定）
                 </Button>
-              </a>
+              )}
             </div>
           </div>
         </div>
