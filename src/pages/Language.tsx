@@ -1,12 +1,13 @@
 import { Layout } from "@/components/layout/Layout";
 import { languageData } from "@/data/siteData";
-import { Globe, MessageCircle, AlertCircle, Mic, Brain, BookOpen, Laugh, ExternalLink } from "lucide-react";
+import { Globe, MessageCircle, AlertCircle, Mic, Brain, BookOpen, Laugh, ExternalLink, AudioLines } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { lazy, Suspense } from "react";
 
 const LearningStyleQuiz = lazy(() => import("@/components/language/LearningStyleQuiz"));
 const LanguageFunFacts = lazy(() => import("@/components/language/LanguageFunFacts"));
 const LanguageChatbot = lazy(() => import("@/components/language/LanguageChatbot"));
+const HakkaPractice = lazy(() => import("@/components/language/HakkaPractice"));
 
 const levelColors: Record<string, string> = {
   Native: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
@@ -118,7 +119,7 @@ const Language = () => {
           <Tabs defaultValue="quiz" className="w-full">
             <div className="flex flex-col items-center mb-10">
               <h2 className="text-2xl font-semibold text-foreground mb-4 text-center">互動體驗區</h2>
-              <TabsList className="grid grid-cols-3 w-full max-w-md">
+              <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full max-w-2xl h-auto">
                 <TabsTrigger value="quiz" className="gap-1.5 text-xs sm:text-sm">
                   <Brain className="h-4 w-4" /> 學習型態測驗
                 </TabsTrigger>
@@ -127,6 +128,9 @@ const Language = () => {
                 </TabsTrigger>
                 <TabsTrigger value="chat" className="gap-1.5 text-xs sm:text-sm">
                   <MessageCircle className="h-4 w-4" /> 多語言對話
+                </TabsTrigger>
+                <TabsTrigger value="hakka" className="gap-1.5 text-xs sm:text-sm">
+                  <AudioLines className="h-4 w-4" /> 客語練習
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -162,6 +166,17 @@ const Language = () => {
               </div>
               <Suspense fallback={<div className="text-center text-muted-foreground py-12">載入中...</div>}>
                 <LanguageChatbot />
+              </Suspense>
+            </TabsContent>
+
+            <TabsContent value="hakka">
+              <div className="mb-6 text-center">
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                  切換四縣腔與海陸腔，以客語拼音輔助聽音、跟讀與錄音練習。
+                </p>
+              </div>
+              <Suspense fallback={<div className="text-center text-muted-foreground py-12">載入中...</div>}>
+                <HakkaPractice />
               </Suspense>
             </TabsContent>
           </Tabs>
