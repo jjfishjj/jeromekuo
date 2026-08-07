@@ -9,6 +9,7 @@
   "/lectures": { "title": "Lectures & Workshops — Jerome Kuo", "description": "Talks, workshops, and teaching materials about learning systems, analytics, AI products, and technical communication." },
   "/contact": { "title": "Contact Jerome Kuo", "description": "Contact Jerome Kuo about AI product, program management, learning systems, analytics, and technical storytelling." },
   "/resume": { "title": "Jerome Kuo — AI Product & Program Manager", "description": "Jerome Kuo is an AI product and program leader spanning GenAI, analytics, GPU ecosystems, technical storytelling, and semiconductor supply chains." },
+  "/resume-summary": { "title": "Career Footprint — Jerome Kuo", "description": "Explore Jerome Kuo's career footprint across AI products, data analytics, creative technology, GPU ecosystems, hardware supply chains, and semiconductor research." },
   "/admin": { "title": "Portfolio Admin", "description": "Portfolio administration.", "index": false },
   "/admin/login": { "title": "Portfolio Admin Login", "description": "Portfolio administration login.", "index": false }
 }

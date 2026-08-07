@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import {
   ArrowDownRight, ArrowUpRight, BarChart3, Bot, Boxes, BriefcaseBusiness,
-  Cpu, Download, Github, GraduationCap, Languages, Linkedin, MapPin, Menu,
-  Microscope, Printer, Sparkles, X,
+  Cpu, Download, Github, GraduationCap, Languages, Linkedin, MapPin, Menu, Palette,
+  Microscope, Printer, Sparkles, X, Copy, Check, ArrowUp,
 } from "lucide-react";
 
-type Lang = "zh" | "en";
+type Lang = "zh" | "en" | "ja" | "ko" | "de" | "fr" | "es";
+type Theme = "lime" | "nvidia" | "cobalt" | "sand";
 type RoleTrack = "product" | "solution" | "devrel";
-type Localized = { zh: string; en: string };
-const tx = (value: Localized, lang: Lang) => value[lang];
+type CopyState = "idle" | "success" | "error";
+type Localized = { zh: string; en: string; ja?: string; ko?: string };
+const tx = (value: Localized, lang: Lang) => value[lang] || value.en;
+
+const languages: { id: Lang; label: string; short: string }[] = [
+  { id: "zh", label: "繁體中文", short: "中" }, { id: "en", label: "English", short: "EN" },
+  { id: "ja", label: "日本語", short: "日" }, { id: "ko", label: "한국어", short: "한" },
+  { id: "de", label: "Deutsch", short: "DE" }, { id: "fr", label: "Français", short: "FR" }, { id: "es", label: "Español", short: "ES" },
+];
+const themes: { id: Theme; label: string; color: string }[] = [
+  { id: "lime", label: "Lime", color: "#d9ff43" }, { id: "nvidia", label: "NVIDIA", color: "#76b900" },
+  { id: "cobalt", label: "Cobalt", color: "#4f7cff" }, { id: "sand", label: "Sand", color: "#d88955" },
+];
 
 const links = {
   linkedin: "https://www.linkedin.com/in/kuo-jun-bin-%EC%A4%80%EB%B9%88-jerome-0a224490/",
@@ -16,6 +28,7 @@ const links = {
   dashboard: "https://jjfishjj.github.io/linkedin/",
   analytics: "https://jjfishjj.github.io/projects/data-analytics-visualization/",
   source: "https://docs.google.com/document/d/1R5zm1siMvTdb8IQHI72AaJNAJgbBOD6iK9boaT4W5Tg/edit",
+  footprint: "https://jjfishjj.github.io/resume-footprint-map/",
 };
 
 const strengths = [
@@ -99,18 +112,52 @@ const copy = {
   build:{zh:"一起打造下一個產品",en:"LET'S BUILD SOMETHING"},
 };
 
+const localeOverrides: Partial<Record<Lang, Record<string, string>>> = {
+  ja: {
+    available:"台北を拠点に、AIプロダクトと領域横断の機会を探しています", overline:"AIプロダクト × データ × GPUエコシステム",
+    heroA:"複雑な技術を、", heroB:"使われるプロダクトへ。", intro:"Jerome Kuoです。生成AI、ゲームデータ、クリエイティブテクノロジー、半導体研究、ハードウェアサプライチェーンを横断するプロダクト／プロジェクトマネージャーです。", explore:"経歴を見る",
+    aboutTitle:"材料・GPUエコシステム・AI応用をつなぐプロダクト視点。", aboutBody:"クリエイティブ、データ、技術チームの共通言語をつくり、新しいツールを検証可能なプロダクトフローに変換します。半導体薄膜研究、CPU／GPUサプライチェーン、ゲーム分析、生成AI制作、国際コミュニケーションを組み合わせた経験が強みです。",
+    strengthTitle:"AI時代の領域横断スキル", strengthSub:"GPUとデータから、ワークフローと市場展開まで。", fitTitle:"NVIDIA／AI キャリアポジショニング", fitSub:"プロダクトとコミュニケーションの強みを起点に、推論サービスの実装力を深めています。", dli:"NVIDIA DLI 修了",
+    experienceTitle:"職務経歴", experienceSub:"AI、ゲーム、Web3、分析、サプライチェーン、起業。", researchTitle:"半導体材料に基づくハードウェア思考。", educationTitle:"学歴・資格", selected:"主な制作物", workTitle:"アイデアを\n見える成果へ。", contact:"一緒に解く価値のある課題はありますか？", build:"次のプロダクトを一緒につくる"
+  },
+  ko: {
+    available:"타이베이 기반 · AI 제품 및 융합 기회에 열려 있습니다", overline:"AI 제품 × 데이터 × GPU 생태계",
+    heroA:"복잡한 기술을,", heroB:"사람들이 쓰는 제품으로.", intro:"Jerome Kuo입니다. 생성형 AI, 게임 데이터, 크리에이티브 테크놀로지, 반도체 연구와 하드웨어 공급망을 아우르는 제품·프로젝트 매니저입니다.", explore:"경력 살펴보기",
+    aboutTitle:"소재, GPU 생태계, AI 응용을 연결하는 제품 관점.", aboutBody:"크리에이티브·데이터·기술 팀 사이에 공통 언어를 만들고 새로운 도구를 검증 가능한 제품 워크플로로 전환합니다. 반도체 박막 연구, CPU/GPU 공급망, 게임 분석, 생성형 AI 제작과 글로벌 커뮤니케이션 경험을 결합합니다.",
+    strengthTitle:"AI 시대를 위한 융합 역량", strengthSub:"GPU와 데이터에서 워크플로와 시장 실행까지.", fitTitle:"NVIDIA／AI 커리어 포지셔닝", fitSub:"제품과 커뮤니케이션 강점을 기반으로 추론 서비스 구현 역량을 강화하고 있습니다.", dli:"NVIDIA DLI 수료",
+    experienceTitle:"경력", experienceSub:"AI, 게임, Web3, 분석, 공급망과 초기 창업.", researchTitle:"반도체 소재에서 시작한 하드웨어 사고.", educationTitle:"학력 및 자격", selected:"주요 작업", workTitle:"아이디어를\n보이는 결과로.", contact:"함께 풀 가치가 있는 문제가 있나요?", build:"다음 제품을 함께 만들기"
+  },
+  de:{heroA:"Komplexe Technologie",heroB:"in nutzbare Produkte verwandeln.",intro:"Ich bin Jerome Kuo, Produkt- und Projektmanager an der Schnittstelle von generativer KI, Spieldaten, Kreativtechnologie, Halbleiterforschung und Hardware-Lieferketten.",explore:"Berufserfahrung",experienceTitle:"Berufserfahrung",educationTitle:"Ausbildung & Zertifikate",contact:"Ein Problem, das wir gemeinsam lösen sollten?",build:"LASSEN SIE UNS ETWAS ENTWICKELN"},
+  fr:{heroA:"Transformer une technologie complexe",heroB:"en produits réellement utiles.",intro:"Je suis Jerome Kuo, chef de produit et de projet à l'intersection de l'IA générative, des données de jeu, des technologies créatives, des semi-conducteurs et des chaînes d'approvisionnement matérielles.",explore:"Voir mon parcours",experienceTitle:"Expérience",educationTitle:"Formation et certifications",contact:"Un problème qui mérite d'être résolu ensemble ?",build:"CRÉONS QUELQUE CHOSE"},
+  es:{heroA:"Convertir tecnología compleja",heroB:"en productos que la gente usa.",intro:"Soy Jerome Kuo, product y project manager con experiencia en IA generativa, análisis de juegos, tecnología creativa, investigación de semiconductores y cadenas de suministro de hardware.",explore:"Ver experiencia",experienceTitle:"Experiencia",educationTitle:"Educación y certificaciones",contact:"¿Un problema que valga la pena resolver juntos?",build:"CONSTRUYAMOS ALGO"}
+};
+
 export default function Resume() {
   const [open, setOpen] = useState(false);
+  const [copyState, setCopyState] = useState<CopyState>("idle");
+  const [activeSection,setActiveSection]=useState("top");
+  const [showTop,setShowTop]=useState(false);
+  const [readingProgress,setReadingProgress]=useState(0);
   const [lang, setLang] = useState<Lang>(() => {
     const requested = new URLSearchParams(window.location.search).get("lang");
-    return requested === "en" || requested === "zh" ? requested : (localStorage.getItem("resume-lang") as Lang) || "zh";
+    const stored = localStorage.getItem("resume-lang");
+    if (languages.some(item => item.id === requested)) return requested as Lang;
+    return languages.some(item => item.id === stored) ? stored as Lang : "zh";
+  });
+  const [theme, setTheme] = useState<Theme>(() => {
+    const requested = new URLSearchParams(window.location.search).get("theme");
+    const stored = localStorage.getItem("resume-theme");
+    if (themes.some(item => item.id === requested)) return requested as Theme;
+    return themes.some(item => item.id === stored) ? stored as Theme : "lime";
   });
   const [role, setRole] = useState<RoleTrack>(() => {
     const requested = new URLSearchParams(window.location.search).get("role");
     return requested === "solution" || requested === "devrel" ? requested : "product";
   });
-  const c = <K extends keyof typeof copy>(key: K) => tx(copy[key] as Localized, lang);
-  const setLanguage = (next: Lang) => { setLang(next); localStorage.setItem("resume-lang", next); trackEvent("language_change", { language: next }); };
+  const c = <K extends keyof typeof copy>(key: K) => localeOverrides[lang]?.[key as string] || tx(copy[key] as Localized, lang);
+  const syncUrl = (nextLang: Lang, nextTheme: Theme) => { const url = new URL(window.location.href); url.searchParams.set("lang", nextLang); url.searchParams.set("theme", nextTheme); window.history.replaceState({}, "", url); };
+  const setLanguage = (next: Lang) => { setLang(next); localStorage.setItem("resume-lang", next); syncUrl(next, theme); trackEvent("language_change", { language: next }); };
+  const setColorTheme = (next: Theme) => { setTheme(next); localStorage.setItem("resume-theme", next); syncUrl(lang, next); trackEvent("theme_change", { theme: next }); };
   const setRoleTrack = (next: RoleTrack) => {
     setRole(next);
     const url = new URL(window.location.href);
@@ -119,25 +166,50 @@ export default function Resume() {
     window.history.replaceState({}, "", url);
     trackEvent("role_view", { role: next, language: lang });
   };
+  const copyVersionUrl = async () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", lang);
+    url.searchParams.set("theme", theme);
+    url.searchParams.set("role", role);
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      setCopyState("success");
+      trackEvent("version_url_copy", { language: lang, theme, role });
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = url.toString();
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      const copied = document.execCommand("copy");
+      field.remove();
+      setCopyState(copied ? "success" : "error");
+      if (copied) trackEvent("version_url_copy", { language: lang, theme, role });
+    }
+  };
 
   useEffect(() => {
-    document.documentElement.lang = lang === "zh" ? "zh-Hant" : "en";
-    document.title = lang === "zh" ? "Jerome Kuo — AI 產品與專案經理" : "Jerome Kuo — AI Product & Project Manager";
+    document.documentElement.lang = ({zh:"zh-Hant",en:"en",ja:"ja",ko:"ko",de:"de",fr:"fr",es:"es"} as const)[lang];
+    document.title = lang === "zh" ? "Jerome Kuo — AI 產品與專案經理" : lang === "ja" ? "Jerome Kuo — AIプロダクトマネージャー" : lang === "ko" ? "Jerome Kuo — AI 제품 매니저" : "Jerome Kuo — AI Product & Project Manager";
     const description = lang === "zh" ? "Jerome Kuo 的 AI 產品、解決方案架構與技術行銷履歷，橫跨生成式 AI、數據分析、GPU 生態與半導體供應鏈。" : "Jerome Kuo is an AI product and program leader spanning GenAI, analytics, GPU ecosystems, technical storytelling, and semiconductor supply chains.";
     document.querySelector('meta[name="description"]')?.setAttribute("content", description);
     document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
     document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", description);
   }, [lang]);
+  useEffect(()=>{const ids=["top","about","strengths","ai-fit","experience","education"];const update=()=>{setShowTop(window.scrollY>650);setReadingProgress(Math.min(100,window.scrollY/Math.max(1,document.documentElement.scrollHeight-window.innerHeight)*100));let current="top";for(const id of ids){const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=150)current=id}setActiveSection(current);if(!location.hash.startsWith("#job-")&&current!=="top"&&location.hash!==`#${current}`)history.replaceState({},"",`${location.pathname}${location.search}#${current}`)};update();window.addEventListener("scroll",update,{passive:true});return()=>window.removeEventListener("scroll",update)},[]);
+  useEffect(()=>{const slugs=["codenet","gamania","avmapping","metasens","imperium","huiria","chenghsi"];const slug=location.hash.replace("#job-","");const index=slugs.indexOf(slug);if(index>=0){requestAnimationFrame(()=>document.querySelectorAll(".resume-job")[index]?.scrollIntoView({block:"start"}))}},[]);
 
   const nav = [["about", tx(copy.nav.about,lang)], ["strengths",tx(copy.nav.strengths,lang)], ["ai-fit",tx(copy.nav.fit,lang)], ["experience",tx(copy.nav.experience,lang)], ["education",tx(copy.nav.education,lang)]];
 
-  return <main className={`resume-page lang-${lang}`}>
+  return <main className={`resume-page lang-${lang} theme-${theme}`}><div className="resume-progress" style={{width:`${readingProgress}%`}}/>
     <header className="resume-nav">
       <a className="resume-mark" href="#top" aria-label={lang === "zh" ? "回到頂端" : "Back to top"}>JK<span>.</span></a>
-      <nav className={open ? "is-open" : ""} aria-label={lang === "zh" ? "履歷導覽" : "Resume navigation"}>{nav.map(([id,label]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}</nav>
+      <nav className={open ? "is-open" : ""} aria-label={lang === "zh" ? "履歷導覽" : "Resume navigation"}><div className="resume-nav-priority"><a href={`/resume-summary?lang=${lang}&theme=${theme}&role=${role}`} onClick={()=>trackEvent("summary_click")}>{lang === "zh" ? "經歷總結" : "Career Map"}<ArrowUpRight/></a><a className={activeSection==="experience"?"active":""} href="#experience" onClick={() => {setOpen(false);trackEvent("resume_jump")}}>{lang === "zh" ? "完整履歷" : "Full Resume"}<ArrowDownRight/></a></div><div className="resume-nav-secondary">{nav.filter(([id])=>id!=="experience").map(([id,label]) => <a className={activeSection===id?"active":""} key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}</div></nav>
       <div className="resume-nav-tools">
-        <div className="resume-lang" aria-label="Language"><Languages/><button className={lang === "zh" ? "active" : ""} onClick={() => setLanguage("zh")}>中</button><span>/</span><button className={lang === "en" ? "active" : ""} onClick={() => setLanguage("en")}>EN</button></div>
-        <button className="resume-print" onClick={() => window.print()}><Printer/>{lang === "zh" ? "列印" : "Print"}</button>
+        <div className="resume-customizers"><label className="resume-select"><Languages/><select aria-label="Language" value={lang} onChange={event => setLanguage(event.target.value as Lang)}>{languages.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label><div className="resume-theme-picker" aria-label="Color theme"><Palette/>{themes.map(item => <button key={item.id} className={theme === item.id ? "active" : ""} style={{"--swatch":item.color} as React.CSSProperties} onClick={() => setColorTheme(item.id)} title={item.label} aria-label={item.label} aria-pressed={theme === item.id}/>)}</div></div>
+        <button className="resume-print" onClick={() => window.print()}><Printer/>{lang === "zh" ? "匯出 PDF" : "PDF"}</button><button className="resume-print" onClick={copyVersionUrl}>{copyState === "success"?<Check/>:<Copy/>}{copyState === "success"?(lang==="zh"?"已複製":"Copied"):copyState === "error"?(lang==="zh"?"複製失敗":"Copy failed"):(lang==="zh"?"複製版本":"Copy")}</button>
         <a className="resume-nav-cta" href="mailto:guocheju@gmail.com">LET'S TALK <ArrowUpRight/></a>
       </div>
       <button className="resume-menu" onClick={() => setOpen(!open)} aria-label={lang === "zh" ? "切換選單" : "Toggle menu"}>{open ? <X/> : <Menu/>}</button>
@@ -145,7 +217,7 @@ export default function Resume() {
 
     <section id="top" className="resume-hero">
       <div className="resume-kicker"><span/>{c("available")}</div>
-      <div className="resume-hero-grid"><div><p className="resume-overline">{c("overline")}</p><h1>{c("heroA")}<br/><span>{c("heroB")}</span></h1></div><div className="resume-hero-aside"><p>{c("intro")}</p><div className="resume-actions"><a className="resume-primary" href="#experience">{c("explore")}<ArrowDownRight/></a><a className="resume-icon-link" href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin/></a><a className="resume-icon-link" href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github/></a></div></div></div>
+      <div className="resume-hero-grid"><div><p className="resume-overline">{c("overline")}</p><h1>{c("heroA")}<br/><span>{c("heroB")}</span></h1></div><div className="resume-hero-aside"><p>{c("intro")}</p><div className="resume-actions"><a className="resume-primary" href={`/resume-summary?lang=${lang}&theme=${theme}&role=${role}`}>{lang==="zh"?"看經歷總結":"Career overview"}<ArrowUpRight/></a><a className="resume-primary resume-primary-alt" href="#experience">{lang==="zh"?"看完整履歷":"Full resume"}<ArrowDownRight/></a><a className="resume-icon-link" href={links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin/></a><a className="resume-icon-link" href={links.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github/></a></div></div></div>
       <div className="resume-stats"><div><strong>13+</strong><span>YEARS ACROSS INDUSTRIES</span></div><div><strong>04</strong><span>CONNECTED DOMAINS</span></div><div><strong>10→60%</strong><span>PLATFORM SUSTAINABILITY</span></div><div><strong>20%</strong><span>AIR FREIGHT COST SAVED</span></div></div>
     </section>
 
@@ -153,7 +225,7 @@ export default function Resume() {
 
     <section id="strengths" className="resume-section resume-strengths"><div className="resume-heading-row"><div><div className="resume-section-label">02 / CORE STRENGTHS</div><h2>{c("strengthTitle")}</h2></div><p>{c("strengthSub")}</p></div><div className="resume-strength-grid">{strengths.map(s => {const Icon=s.icon;return <article key={s.eyebrow}><div className="resume-card-top"><span>{s.eyebrow}</span><Icon/></div><h3>{tx(s.title,lang)}</h3><p>{tx(s.text,lang)}</p></article>})}</div></section>
 
-    <section id="ai-fit" className="resume-section resume-ai-fit"><div className="resume-heading-row"><div><div className="resume-section-label">03 / NVIDIA + AI POSITIONING</div><h2>{c("fitTitle")}</h2></div><p>{c("fitSub")}</p></div><div className="resume-role-picker" role="group" aria-label={lang === "zh" ? "選擇職缺版本" : "Choose a role version"}>{nvidiaTracks.map(track => <button key={track.id} className={role === track.id ? "active" : ""} onClick={() => setRoleTrack(track.id)}><small>{track.fit}</small><strong>{track.title}</strong></button>)}</div><div className="resume-role-focus"><span>{lang === "zh" ? "目前版本" : "CURRENT VERSION"}</span><h3>{tx(nvidiaTracks.find(track => track.id === role)!.headline,lang)}</h3><p>{tx(nvidiaTracks.find(track => track.id === role)!.body,lang)}</p></div><div className="resume-dli"><div><Cpu/><span>{c("dli")}</span></div><ul><li>{lang === "zh" ? "深度學習基礎理論與實踐" : "Fundamentals of Deep Learning"}</li><li>{lang === "zh" ? "快速開發 LLM 應用程式" : "Rapid Application Development with LLMs"}</li><li>{lang === "zh" ? "Jetson Nano AI 應用開發" : "AI Development with Jetson Nano"}</li></ul></div></section>
+    <section id="ai-fit" className="resume-section resume-ai-fit"><div className="resume-heading-row"><div><div className="resume-section-label">03 / NVIDIA + AI POSITIONING</div><h2>{c("fitTitle")}</h2></div><p>{c("fitSub")}</p></div><div className="resume-role-picker" role="group" aria-label={lang === "zh" ? "選擇職缺版本" : "Choose a role version"}>{nvidiaTracks.map(track => <button key={track.id} className={role === track.id ? "active" : ""} aria-pressed={role === track.id} onClick={() => setRoleTrack(track.id)}><small>{track.fit}</small><strong>{track.title}</strong></button>)}</div><div className="resume-role-focus"><span>{lang === "zh" ? "目前版本" : "CURRENT VERSION"}</span><h3>{tx(nvidiaTracks.find(track => track.id === role)!.headline,lang)}</h3><p>{tx(nvidiaTracks.find(track => track.id === role)!.body,lang)}</p></div><div className="resume-dli"><div><Cpu/><span>{c("dli")}</span></div><ul><li>{lang === "zh" ? "深度學習基礎理論與實踐" : "Fundamentals of Deep Learning"}</li><li>{lang === "zh" ? "快速開發 LLM 應用程式" : "Rapid Application Development with LLMs"}</li><li>{lang === "zh" ? "Jetson Nano AI 應用開發" : "AI Development with Jetson Nano"}</li></ul></div></section>
 
     <section className="resume-section resume-cases"><div className="resume-heading-row"><div><div className="resume-section-label">04 / NVIDIA PROJECT ROADMAP</div><h2>{lang === "zh" ? "從學習證明，走向可展示案例。" : "From learning credentials to demonstrable work."}</h2></div><p>{lang === "zh" ? "案例狀態公開標示；完成後將補上原始碼、架構與 benchmark。" : "Statuses are explicit. Source code, architecture, and benchmarks will be added as each project ships."}</p></div><div className="resume-case-grid">{projectCases.filter(item => item.roles.includes(role)).map(item => <article key={item.title}><div><span>{tx(item.status,lang)}</span><small>{item.tools}</small></div><h3>{item.title}</h3><p>{tx(item.body,lang)}</p></article>)}</div></section>
 
@@ -165,6 +237,6 @@ export default function Resume() {
 
     <section className="resume-work resume-section"><div><div className="resume-section-label">{c("selected")}</div><h2>{c("workTitle").split("\n").map((line,i)=><span key={line}>{line}{i===0&&<br/>}</span>)}</h2></div><div className="resume-link-list"><a href={links.github} target="_blank" rel="noreferrer"><span><Github/>GitHub Portfolio</span><ArrowUpRight/></a><a href={links.dashboard} target="_blank" rel="noreferrer"><span><Boxes/>{lang === "zh" ? "3D 經歷儀表板" : "3D Career Dashboard"}</span><ArrowUpRight/></a><a href={links.analytics} target="_blank" rel="noreferrer"><span><BarChart3/>{lang === "zh" ? "數據分析案例頁" : "Data Analytics Case Study"}</span><ArrowUpRight/></a><a href="/Jerome-Kuo-Resume.pdf" download><span><Download/>{lang === "zh" ? "下載 PDF 履歷" : "Download PDF Resume"}</span><ArrowDownRight/></a></div></section>
 
-    <footer className="resume-footer"><p>{c("contact")}</p><a href="mailto:guocheju@gmail.com">{c("build")}<ArrowUpRight/></a><div><span>© 2026 JEROME KUO</span><span>TAIPEI, TAIWAN</span><a href={links.source} target="_blank" rel="noreferrer"><BriefcaseBusiness/>{lang === "zh" ? "原始履歷" : "Source Resume"}</a></div></footer>
+    {showTop&&<button className="resume-back-top" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} aria-label={lang==="zh"?"返回頂端":"Back to top"}><ArrowUp/></button>}<footer className="resume-footer"><p>{c("contact")}</p><a href="mailto:guocheju@gmail.com">{c("build")}<ArrowUpRight/></a><div><span>© 2026 JEROME KUO</span><span>TAIPEI, TAIWAN</span><a href={links.source} target="_blank" rel="noreferrer"><BriefcaseBusiness/>{lang === "zh" ? "原始履歷" : "Source Resume"}</a></div></footer>
   </main>;
 }

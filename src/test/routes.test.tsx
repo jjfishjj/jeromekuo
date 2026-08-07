@@ -11,6 +11,7 @@ vi.mock("@/pages/Contact", () => ({ default: () => <h1>Contact route</h1> }));
 vi.mock("@/pages/Videos", () => ({ default: () => <h1>Videos route</h1> }));
 vi.mock("@/pages/Lectures", () => ({ default: () => <h1>Lectures route</h1> }));
 vi.mock("@/pages/Resume", () => ({ default: () => <h1>Resume route</h1> }));
+vi.mock("@/pages/ResumeSummary", () => ({ default: () => <h1>Resume summary route</h1> }));
 vi.mock("@/pages/AdminLogin", () => ({ default: () => <h1>Admin login route</h1> }));
 vi.mock("@/pages/AdminDashboard", () => ({ default: () => <h1>Admin route</h1> }));
 vi.mock("@/pages/NotFound", () => ({ default: () => <h1>Not found route</h1> }));
@@ -31,5 +32,11 @@ describe("application routes", () => {
     window.history.pushState({}, "", "/missing-page");
     render(<App />);
     await waitFor(() => expect(screen.getByRole("heading", { name: "Not found route" })).toBeInTheDocument());
+  });
+
+  it("renders the public resume summary route", async () => {
+    window.history.pushState({}, "", "/resume-summary");
+    render(<App />);
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Resume summary route" })).toBeInTheDocument());
   });
 });

@@ -1,4 +1,6 @@
 /resume /resume.html 200
+/resume/summary /resume.html 200
+/resume-summary /resume-summary.html 200
 /memory /memory.html 200
 /journal /journal.html 200
 /language /language.html 200
