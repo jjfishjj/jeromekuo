@@ -19,6 +19,7 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const Videos = lazy(() => import("./pages/Videos"));
 const Lectures = lazy(() => import("./pages/Lectures"));
 const Resume = lazy(() => import("./pages/Resume"));
+const ResumeSummary = lazy(() => import("./pages/ResumeSummary"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -43,6 +44,8 @@ const App = () => (
               <Route path="/videos" element={<Videos />} />
               <Route path="/lectures" element={<Lectures />} />
               <Route path="/resume" element={<Resume />} />
+              <Route path="/resume-summary" element={<ResumeSummary />} />
+              <Route path="/resume/summary" element={<ResumeSummary />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="*" element={<NotFound />} />
