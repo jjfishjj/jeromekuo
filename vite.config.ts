@@ -26,12 +26,16 @@ export default defineConfig(({ mode }) => ({
       },
       output: {
         manualChunks(id) {
-          if (!id.includes("node_modules")) return;
-          if (id.includes("recharts") || id.includes("d3-") || id.includes("victory-vendor")) return "charts";
-          if (id.includes("@supabase") || id.includes("@tanstack/react-query")) return "data";
-          if (id.includes("react") || id.includes("scheduler")) return "react";
-          if (id.includes("@radix-ui") || id.includes("cmdk") || id.includes("lucide-react")) return "ui";
-          return "vendor";
+          const marker = "/node_modules/";
+          const markerIndex = id.lastIndexOf(marker);
+          if (markerIndex === -1) return;
+
+          const packagePath = id.slice(markerIndex + marker.length);
+          if (/^(react|react-dom|react-router|react-router-dom|scheduler)(\/|$)/.test(packagePath)) return "framework";
+          if (/^(recharts|d3-|victory-vendor)(\/|$)/.test(packagePath)) return "charts";
+          if (/^(@supabase|@tanstack\/react-query)(\/|$)/.test(packagePath)) return "data";
+          if (/^(@radix-ui|cmdk|lucide-react)(\/|$)/.test(packagePath)) return "ui";
+          return undefined;
         },
       },
     },
