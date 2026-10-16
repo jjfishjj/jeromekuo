@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
 
+const hasSupabaseConfig = () => Boolean(
+  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+);
 const textCache = new Map<string, string>();
 let allFetched = false;
 let fetchPromise: Promise<void> | null = null;
+let fetchGeneration = 0;
 
-const fetchAllTexts = async () => {
-  if (allFetched) return;
+const fetchAllTexts = async (generation: number) => {
+  if (allFetched || !hasSupabaseConfig()) return;
+  const { supabase } = await import("@/integrations/supabase/client");
+  if (generation !== fetchGeneration) return;
   const { data } = await supabase
     .from("site_content")
     .select("content_key, content_value")
     .eq("content_type", "text");
-  if (data) {
+  if (data && generation === fetchGeneration) {
     data.forEach((row) => {
       if (row.content_value) {
         textCache.set(row.content_key, row.content_value);
@@ -22,9 +27,10 @@ const fetchAllTexts = async () => {
 };
 
 const ensureTextsFetched = () => {
+  const generation = fetchGeneration;
   if (!fetchPromise) {
-    fetchPromise = fetchAllTexts().finally(() => {
-      fetchPromise = null;
+    fetchPromise = fetchAllTexts(generation).finally(() => {
+      if (generation === fetchGeneration) fetchPromise = null;
     });
   }
   return fetchPromise;
@@ -38,17 +44,27 @@ export const useSiteText = (contentKey: string, fallback: string): string => {
       setValue(textCache.get(contentKey)!);
       return;
     }
-    ensureTextsFetched().then(() => {
-      if (textCache.has(contentKey)) {
-        setValue(textCache.get(contentKey)!);
-      }
-    });
+    if (!hasSupabaseConfig()) return;
+    let active = true;
+    ensureTextsFetched()
+      .then(() => {
+        if (active && textCache.has(contentKey)) {
+          setValue(textCache.get(contentKey)!);
+        }
+      })
+      .catch(() => {
+        // The fallback text remains usable if the optional content service is unavailable.
+      });
+    return () => {
+      active = false;
+    };
   }, [contentKey, fallback]);
 
   return value;
 };
 
 export const invalidateSiteTextCache = () => {
+  fetchGeneration += 1;
   textCache.clear();
   allFetched = false;
   fetchPromise = null;

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { languageNames, languageFlags } from "@/i18n/types";
 import type { Language } from "@/i18n/types";
+import { a11yCopy } from "@/data/a11yCopy";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +38,7 @@ export const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/30">
-      <nav className="section-container">
+      <nav className="section-container" aria-label={t("footer.navigation")}>
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-lg font-bold text-foreground">
@@ -53,6 +54,7 @@ export const Header = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                aria-current={isActive(item.path) ? "page" : undefined}
                 className={cn(
                   "px-3 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive(item.path)
@@ -96,21 +98,24 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/contact" className="hidden lg:block">
-              <Button
-                size="sm"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
-              >
+            <Button
+              asChild
+              size="sm"
+              className="hidden lg:inline-flex bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+            >
+              <Link to="/contact">
                 {t("nav.bookNow")}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
 
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className="lg:hidden min-h-11 min-w-11"
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "關閉導覽選單" : "開啟導覽選單"}
+              aria-label={mobileMenuOpen ? a11yCopy[lang].closeMenu : a11yCopy[lang].openMenu}
+              aria-controls="mobile-navigation"
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -118,13 +123,13 @@ export const Header = () => {
           </div>
         </div>
 
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border/30 animate-fade-in">
+          <div id="mobile-navigation" hidden={!mobileMenuOpen} className="lg:hidden py-4 border-t border-border/30 animate-fade-in">
             <div className="flex flex-col gap-1">
               {navKeys.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
+                  aria-current={isActive(item.path) ? "page" : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
                     "px-3 py-2.5 text-sm font-medium rounded-md transition-colors",
@@ -142,10 +147,12 @@ export const Header = () => {
                   {languages.map((l) => (
                     <button
                       key={l}
+                      type="button"
                       onClick={() => {
                         setLang(l);
                         setMobileMenuOpen(false);
                       }}
+                      aria-pressed={lang === l}
                       className={cn(
                         "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
                         lang === l
@@ -157,15 +164,14 @@ export const Header = () => {
                     </button>
                   ))}
                 </div>
-                <Link to="/contact" className="block px-3" onClick={() => setMobileMenuOpen(false)}>
-                  <Button size="sm" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                <Button asChild size="sm" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Link to="/contact" className="block px-3" onClick={() => setMobileMenuOpen(false)}>
                     {t("nav.bookNow")}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
-        )}
       </nav>
     </header>
   );

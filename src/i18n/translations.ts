@@ -87,7 +87,7 @@ const zh = {
   "service.4.includes": "學習路徑規劃,多感官記憶法,跨語言對比,實戰練習設計",
 
   // Case Studies
-  "cases.title": "成功案例",
+  "cases.title": "精選專案",
   "cases.subtitle": "看看如何將學習理論轉化為實際成果",
   "cases.challengeLabel": "挑戰",
   "cases.solutionLabel": "解決方案",
@@ -336,7 +336,7 @@ const en: typeof zh = {
   "service.4.solution": "Design your ideal language learning path based on multilingual experience",
   "service.4.includes": "Learning path planning,Multi-sensory memory,Cross-language comparison,Practice design",
 
-  "cases.title": "Success Stories",
+  "cases.title": "Selected Projects",
   "cases.subtitle": "See how learning theory transforms into real results",
   "cases.challengeLabel": "Challenge",
   "cases.solutionLabel": "Solution",
@@ -575,7 +575,7 @@ const es: typeof zh = {
   "service.4.solution": "Diseña tu ruta ideal de aprendizaje basada en experiencia multilingüe",
   "service.4.includes": "Planificación de ruta,Memoria multi-sensorial,Comparación entre idiomas,Diseño de práctica",
 
-  "cases.title": "Casos de Éxito",
+  "cases.title": "Proyectos Destacados",
   "cases.subtitle": "Cómo la teoría del aprendizaje se transforma en resultados reales",
   "cases.challengeLabel": "Desafío",
   "cases.solutionLabel": "Solución",
@@ -814,7 +814,7 @@ const he: typeof zh = {
   "service.4.solution": "עצב את המסלול האידיאלי שלך מניסיון רב-לשוני",
   "service.4.includes": "תכנון מסלול,זיכרון רב-חושי,השוואת שפות,עיצוב תרגול",
 
-  "cases.title": "סיפורי הצלחה",
+  "cases.title": "פרויקטים נבחרים",
   "cases.subtitle": "איך תיאוריית למידה הופכת לתוצאות",
   "cases.challengeLabel": "אתגר",
   "cases.solutionLabel": "פתרון",
@@ -1053,7 +1053,7 @@ const ko: typeof zh = {
   "service.4.solution": "다언어 경험을 바탕으로 이상적인 학습 경로를 설계합니다",
   "service.4.includes": "학습 경로 기획,다감각 기억법,언어 간 비교,실전 연습 설계",
 
-  "cases.title": "성공 사례",
+  "cases.title": "주요 프로젝트",
   "cases.subtitle": "학습 이론이 실제 결과로 변환되는 과정",
   "cases.challengeLabel": "도전",
   "cases.solutionLabel": "해결책",
@@ -1292,7 +1292,7 @@ const fr: typeof zh = {
   "service.4.solution": "Concevez votre parcours idéal basé sur l'expérience multilingue",
   "service.4.includes": "Planification du parcours,Mémoire multi-sensorielle,Comparaison inter-langues,Design de pratique",
 
-  "cases.title": "Cas de Réussite",
+  "cases.title": "Projets sélectionnés",
   "cases.subtitle": "Comment la théorie se transforme en résultats",
   "cases.challengeLabel": "Défi",
   "cases.solutionLabel": "Solution",

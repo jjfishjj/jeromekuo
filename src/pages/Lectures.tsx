@@ -64,17 +64,17 @@ const Lectures = () => {
               拼寫、聲音與句型轉換成更容易提取的記憶結構。
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link to="/contact">
-                <Button className="w-full sm:w-auto gap-2">
+              <Button asChild className="w-full sm:w-auto gap-2">
+                <Link to="/contact">
                   詢問講座合作
                   <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to="/language">
-                <Button variant="outline" className="w-full sm:w-auto">
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <Link to="/language">
                   查看語言學習資源
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

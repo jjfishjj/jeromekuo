@@ -10,6 +10,7 @@ Jerome Kuo 的多語個人網站，主題涵蓋學習系統、記憶設計、成
 - 語言學習測驗、知識文章與規則式聊天工具
 - Supabase 驅動的影片、文字與圖片內容管理
 - 響應式導覽，以及希伯來文 RTL 排版支援
+- 六語聯絡表單、伺服器端郵件轉寄與鍵盤可及的主導覽
 
 ## 技術架構
 
@@ -54,6 +55,8 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-or-publishable-key
 
 請勿在任何 `VITE_` 變數中放入 Supabase service-role key 或其他伺服器端祕密；Vite 會把這些值打包進瀏覽器程式碼。
 
+聯絡表單使用 Vercel Function、Resend 與 Upstash Redis。需設定 `RESEND_API_KEY`、`CONTACT_TO_EMAIL`、`CONTACT_FROM_EMAIL`、`UPSTASH_REDIS_REST_URL`、`UPSTASH_REDIS_REST_TOKEN` 五個**不帶 `VITE_` 前綴**的伺服器端環境變數；Upstash token 必須具寫入權限，未設定共享限流服務時 API 會停止寄信。寄件者網域需先在 Resend 驗證。詳見[聯絡表單設定說明](docs/contact-form.md)。
+
 ## 常用指令
 
 | 指令 | 用途 |
@@ -82,12 +85,12 @@ npx supabase db push
 1. 匯入這個 GitHub repository。
 2. Framework Preset 選擇 **Vite**。
 3. Build Command 使用 `npm run build`，Output Directory 使用 `dist`。
-4. 在 Project Settings → Environment Variables 加入三個 `VITE_SUPABASE_*` 變數。
-5. 部署。repository 內的 `vercel.json` 會把 React Router 路徑導回 `index.html`。
+4. 在 Project Settings → Environment Variables 加入三個 `VITE_SUPABASE_*` 變數及五個聯絡表單伺服器端變數（詳見上方說明）。
+5. 部署。repository 內的 `vercel.json` 會把各公開路徑導向對應的靜態 SEO HTML，並將 React Router 應用路徑導回 `index.html`。
 
 ### Netlify
 
-Build command 使用 `npm run build`，Publish directory 使用 `dist`，並設定相同環境變數。`public/_redirects` 會處理 SPA 路由重新整理。
+Build command 使用 `npm run build`，Publish directory 使用 `dist`，並設定相同前端環境變數。`public/_redirects` 會處理 SPA 路由重新整理；聯絡表單目前採 Vercel Function，若使用 Netlify，需另行移植 `api/contact.ts` 的伺服器函式與環境變數設定。
 
 ### Lovable
 

@@ -1,0 +1,98 @@
+{
+  "memory": {
+    "zh": [
+      { "question": "「學習風格」是固定的能力分類嗎？", "answer": "不是。視覺、聽覺等分類最多只是觀察偏好與嘗試策略的提示，不能當成固定能力或診斷。研究尚未支持普遍依固定類別配對教學；更實用的做法是依學習任務選媒介，再用回想、練習與回饋檢查是否真正學會。" },
+      { "question": "我應該只用自己偏好的方式學習嗎？", "answer": "不必。內容和目標會影響適合的呈現方式：地理資訊可搭配地圖，發音可多聽多說，複雜概念則可用文字、圖解與實作互相補充。把偏好當作起點，而不是限制。" },
+      { "question": "有哪些方法可以練習記憶？", "answer": "可以把材料分成短段落，隔一段時間不看筆記先回想，再用答案或實際應用檢查；依結果調整下一次複習時間。這是一組可自行測試的學習做法，不代表每個人都必須使用同一種格式。" }
+    ],
+    "en": [
+      { "question": "Are learning styles fixed ability categories?", "answer": "No. Labels such as visual or auditory can be prompts for noticing preferences and trying strategies, but they are not fixed abilities or diagnoses. Research does not support routinely matching instruction to fixed categories; choose methods for the task and check learning through recall, practice, and feedback." },
+      { "question": "Should I study only in my preferred style?", "answer": "No. The task and goal matter: maps can help with spatial information, listening and speaking help with pronunciation, and text, diagrams, and practice can complement one another. Treat a preference as a starting point, not a limit." },
+      { "question": "What are some ways to practise memory?", "answer": "Break material into short parts, try to recall it later without notes, then check your answer or apply it. Adjust when you review again based on what you could recall. These are strategies to test, not a single required format for everyone." }
+    ],
+    "es": [
+      { "question": "¿Los estilos de aprendizaje son categorías fijas de capacidad?", "answer": "No. Etiquetas como visual o auditivo pueden ayudar a observar preferencias y probar estrategias, pero no son capacidades fijas ni diagnósticos. La investigación no respalda emparejar habitualmente la enseñanza con categorías fijas; elige métodos según la tarea y comprueba el aprendizaje con recuerdo, práctica y retroalimentación." },
+      { "question": "¿Debería estudiar solo con mi estilo preferido?", "answer": "No. Importan la tarea y el objetivo: los mapas pueden ayudar con información espacial, escuchar y hablar con la pronunciación, y los textos, diagramas y ejercicios pueden complementarse. Considera una preferencia como punto de partida, no como límite." },
+      { "question": "¿Cómo puedo practicar la memoria?", "answer": "Divide el material en partes breves, intenta recordarlo más tarde sin apuntes y después comprueba la respuesta o aplícalo. Ajusta el siguiente repaso según lo que recuerdes. Son estrategias para probar, no un formato obligatorio para todos." }
+    ],
+    "he": [
+      { "question": "האם סגנונות למידה הם קטגוריות יכולת קבועות?", "answer": "לא. תוויות כמו חזותי או שמיעתי יכולות לעזור לזהות העדפות ולנסות אסטרטגיות, אך הן אינן יכולות קבועות או אבחנות. המחקר אינו תומך בהתאמה שגרתית של הוראה לקטגוריות קבועות; בוחרים שיטה לפי המשימה ובודקים למידה באמצעות שליפה, תרגול ומשוב." },
+      { "question": "האם כדאי ללמוד רק בדרך המועדפת עליי?", "answer": "לא. המשימה והמטרה חשובות: מפות עשויות לעזור במידע מרחבי, האזנה ודיבור בהגייה, וטקסט, תרשימים ותרגול יכולים להשלים זה את זה. העדפה היא נקודת התחלה, לא מגבלה." },
+      { "question": "איך אפשר לתרגל זכירה?", "answer": "חלקו את החומר לקטעים קצרים, נסו להיזכר בו בהמשך בלי להסתכל בהערות, ואז בדקו את התשובה או יישמו אותה. התאימו את מועד החזרה הבאה למה שהצלחתם לזכור. אלה אסטרטגיות לניסוי, לא פורמט אחיד לכולם." }
+    ],
+    "ko": [
+      { "question": "학습 스타일은 고정된 능력 분류인가요?", "answer": "아닙니다. 시각형·청각형 같은 표현은 선호와 전략을 살펴보는 단서일 수 있지만, 고정된 능력이나 진단은 아닙니다. 고정된 유형에 맞춰 가르치는 방식을 일괄 적용하라는 연구 근거는 충분하지 않습니다. 과제에 맞는 방법을 고르고 회상·연습·피드백으로 학습 여부를 확인하세요." },
+      { "question": "선호하는 방식으로만 공부해야 하나요?", "answer": "그럴 필요는 없습니다. 과제와 목표가 중요합니다. 공간 정보에는 지도가, 발음에는 듣기와 말하기가 도움이 될 수 있으며 글·도식·실습은 서로 보완할 수 있습니다. 선호는 출발점이지 한계가 아닙니다." },
+      { "question": "기억을 연습하는 방법은 무엇인가요?", "answer": "내용을 짧게 나누고, 시간이 지난 뒤 노트를 보지 않고 떠올려 보세요. 답을 확인하거나 실제로 적용한 뒤, 기억한 정도에 따라 다음 복습 시점을 조정합니다. 모두에게 같은 형식이 필요한 것은 아닙니다." }
+    ],
+    "fr": [
+      { "question": "Les styles d’apprentissage sont-ils des catégories de capacités fixes ?", "answer": "Non. Des termes comme visuel ou auditif peuvent aider à observer des préférences et à essayer des stratégies, mais ce ne sont ni des capacités fixes ni des diagnostics. La recherche ne justifie pas d’associer systématiquement l’enseignement à ces catégories ; choisissez selon la tâche et vérifiez les acquis par le rappel, la pratique et le retour d’information." },
+      { "question": "Faut-il étudier uniquement selon sa préférence ?", "answer": "Non. La tâche et l’objectif comptent : les cartes peuvent aider pour l’information spatiale, l’écoute et la parole pour la prononciation, et textes, schémas et exercices peuvent se compléter. Une préférence est un point de départ, pas une limite." },
+      { "question": "Comment s’entraîner à mémoriser ?", "answer": "Divisez le contenu en courtes parties, essayez de vous en souvenir plus tard sans notes, puis vérifiez ou appliquez votre réponse. Ajustez le prochain rappel selon ce dont vous vous souvenez. Ce sont des stratégies à tester, pas un format unique pour tous." }
+    ]
+  },
+  "journal": {
+    "zh": [
+      { "question": "成長日誌可以記錄哪些內容？", "answer": "可從身體狀態、情緒、行動、當時情境與事後反思開始。選擇對自己有用且願意持續的欄位即可；避免記錄不必要的身分資料或他人的敏感資訊。" },
+      { "question": "每天需要花很多時間寫日誌嗎？", "answer": "沒有固定時長要求。先設計能輕鬆重複的短紀錄，再每週回看是否看見可採取行動的模式；若欄位太多，就先刪減到最有用的幾項。" },
+      { "question": "日誌頁的圖表代表真實個人追蹤資料嗎？", "answer": "不是。頁面上的圖表和數值是展示用的示意資料，不是個人日記、臨床測量或任何人的實際追蹤結果。請勿將它們解讀為診斷或個人結論。" }
+    ],
+    "en": [
+      { "question": "What can I record in a growth journal?", "answer": "You can start with physical state, mood, actions, context, and a short reflection. Keep only fields that are useful and sustainable for you, and avoid unnecessary identifying or sensitive information about yourself or others." },
+      { "question": "Do I need to spend a long time writing every day?", "answer": "There is no required duration. Start with a brief entry you can repeat, then review weekly for patterns that suggest an action. If the template feels burdensome, reduce it to the most useful fields." },
+      { "question": "Are the charts on this journal page real personal tracking data?", "answer": "No. The charts and values are illustrative demo data, not a personal diary, clinical measurement, or anyone’s actual tracking results. Do not interpret them as a diagnosis or an individual finding." }
+    ],
+    "es": [
+      { "question": "¿Qué puedo registrar en un diario de crecimiento?", "answer": "Puedes empezar por el estado físico, el ánimo, las acciones, el contexto y una breve reflexión. Conserva solo los campos que te resulten útiles y sostenibles, y evita datos identificativos o sensibles innecesarios propios o de otras personas." },
+      { "question": "¿Tengo que dedicar mucho tiempo a escribir cada día?", "answer": "No hay una duración obligatoria. Empieza con una nota breve y repetible; después revisa semanalmente si hay patrones que sugieran una acción. Si la plantilla resulta pesada, redúcela a los campos más útiles." },
+      { "question": "¿Los gráficos de esta página muestran datos personales reales?", "answer": "No. Los gráficos y valores son datos ilustrativos de demostración, no un diario personal, una medición clínica ni resultados reales de seguimiento de nadie. No deben interpretarse como diagnóstico o conclusión individual." }
+    ],
+    "he": [
+      { "question": "מה אפשר לתעד ביומן צמיחה?", "answer": "אפשר להתחיל ממצב גופני, מצב רוח, פעולות, הקשר והרהור קצר. השאירו רק שדות מועילים שאפשר להתמיד בהם, והימנעו מפרטים מזהים או מידע רגיש מיותר עליכם או על אחרים." },
+      { "question": "האם צריך להקדיש זמן רב לכתיבה בכל יום?", "answer": "אין משך זמן מחייב. התחילו ברשומה קצרה שאפשר לחזור עליה, ואז בחנו מדי שבוע דפוסים שעשויים להוביל לפעולה. אם התבנית מכבידה, צמצמו אותה לשדות השימושיים ביותר." },
+      { "question": "האם התרשימים בעמוד הם נתוני מעקב אישיים אמיתיים?", "answer": "לא. התרשימים והערכים הם נתוני הדגמה להמחשה, לא יומן אישי, מדידה קלינית או תוצאות מעקב אמיתיות של אדם כלשהו. אין לפרש אותם כאבחנה או כמסקנה אישית." }
+    ],
+    "ko": [
+      { "question": "성장 일지에는 어떤 내용을 기록할 수 있나요?", "answer": "몸 상태, 기분, 행동, 당시 상황, 짧은 성찰부터 시작할 수 있습니다. 유용하고 지속할 수 있는 항목만 남기고, 본인이나 타인의 불필요한 식별 정보와 민감 정보는 피하세요." },
+      { "question": "매일 오래 써야 하나요?", "answer": "정해진 시간은 없습니다. 반복하기 쉬운 짧은 기록부터 시작하고, 매주 실행으로 이어질 만한 패턴이 있는지 살펴보세요. 양식이 부담스럽다면 가장 유용한 항목만 남기세요." },
+      { "question": "이 페이지의 차트는 실제 개인 추적 데이터인가요?", "answer": "아닙니다. 차트와 수치는 설명을 위한 예시 데이터이며, 개인 일지나 임상 측정, 실제 추적 결과가 아닙니다. 진단이나 개인의 결론으로 해석하지 마세요." }
+    ],
+    "fr": [
+      { "question": "Que puis-je noter dans un journal de progression ?", "answer": "Vous pouvez commencer par l’état physique, l’humeur, les actions, le contexte et une courte réflexion. Gardez uniquement les champs utiles et tenables dans le temps, et évitez les informations identifiantes ou sensibles inutiles sur vous ou autrui." },
+      { "question": "Faut-il écrire longtemps chaque jour ?", "answer": "Aucune durée n’est imposée. Commencez par une note courte et répétable, puis cherchez chaque semaine des tendances qui peuvent guider une action. Si le modèle devient contraignant, réduisez-le aux champs les plus utiles." },
+      { "question": "Les graphiques de cette page sont-ils de vraies données personnelles ?", "answer": "Non. Les graphiques et valeurs sont des données d’exemple illustratives, et non un journal personnel, une mesure clinique ou les résultats réels d’une personne. Ne les interprétez pas comme un diagnostic ou une conclusion individuelle." }
+    ]
+  },
+  "contact": {
+    "zh": [
+      { "question": "送出表單後會發生什麼事？", "answer": "表單內容會透過郵件服務轉交網站管理者，之後可直接回覆你的電子郵件。請勿填入密碼或其他敏感個人資料。" },
+      { "question": "可以洽詢哪些合作？", "answer": "可詢問 AI 與產品合作、學習系統與記憶設計、演講或工作坊等主題；也歡迎選擇「其他」並簡述需求。" },
+      { "question": "表單暫時無法送出時，還有其他聯絡方式嗎？", "answer": "可以使用頁面上的 GitHub 連結聯絡。表單寄送服務需由網站管理者完成郵件服務設定。" }
+    ],
+    "en": [
+      { "question": "What happens after I submit the form?", "answer": "Your message is forwarded to the site owner through an email provider, and they can reply to your email address. Do not include passwords or other sensitive personal information." },
+      { "question": "What kinds of collaboration can I ask about?", "answer": "You can ask about AI and product work, learning systems and memory design, speaking, or workshops. Choose Other if your topic is different." },
+      { "question": "Is there another way to get in touch if the form is unavailable?", "answer": "You can use the GitHub link on this page. The form requires the site owner to configure the email delivery service." }
+    ],
+    "es": [
+      { "question": "¿Qué ocurre después de enviar el formulario?", "answer": "Tu mensaje se reenvía al responsable del sitio mediante un proveedor de correo, que podrá responder a tu dirección. No incluyas contraseñas ni otros datos personales sensibles." },
+      { "question": "¿Sobre qué colaboraciones puedo consultar?", "answer": "Puedes consultar sobre IA y productos, sistemas de aprendizaje y memoria, conferencias o talleres. Elige Otro si tu tema es distinto." },
+      { "question": "¿Hay otra forma de contactar si el formulario no funciona?", "answer": "Puedes usar el enlace de GitHub de esta página. El formulario requiere que el responsable configure el servicio de envío de correo." }
+    ],
+    "he": [
+      { "question": "מה קורה לאחר שליחת הטופס?", "answer": "ההודעה מועברת לבעל האתר באמצעות ספק דוא״ל, והוא יוכל להשיב לכתובת שלכם. אין לכלול סיסמאות או מידע אישי רגיש אחר." },
+      { "question": "על אילו שיתופי פעולה אפשר לפנות?", "answer": "אפשר לפנות בנושא בינה מלאכותית ומוצרים, מערכות למידה ועיצוב זיכרון, הרצאות או סדנאות. בחרו באפשרות אחר אם הנושא שונה." },
+      { "question": "האם יש דרך אחרת ליצור קשר אם הטופס אינו זמין?", "answer": "אפשר להשתמש בקישור GitHub שבעמוד. הטופס דורש מבעל האתר להגדיר שירות לשליחת דוא״ל." }
+    ],
+    "ko": [
+      { "question": "양식을 제출하면 어떻게 되나요?", "answer": "메시지는 이메일 서비스를 통해 사이트 운영자에게 전달되며, 입력한 주소로 답장을 받을 수 있습니다. 비밀번호나 민감한 개인정보는 적지 마세요." },
+      { "question": "어떤 협업을 문의할 수 있나요?", "answer": "AI·제품, 학습 시스템과 기억 설계, 강연이나 워크숍에 관해 문의할 수 있습니다. 다른 주제라면 기타를 선택하세요." },
+      { "question": "양식을 사용할 수 없을 때 다른 연락 방법이 있나요?", "answer": "페이지의 GitHub 링크를 이용할 수 있습니다. 양식은 운영자가 이메일 전송 서비스를 설정해야 작동합니다." }
+    ],
+    "fr": [
+      { "question": "Que se passe-t-il après l’envoi du formulaire ?", "answer": "Votre message est transmis au responsable du site par un service de messagerie, qui pourra répondre à votre adresse e-mail. N’incluez pas de mots de passe ni d’autres données personnelles sensibles." },
+      { "question": "Quels types de collaboration puis-je proposer ?", "answer": "Vous pouvez poser une question sur l’IA et les produits, les systèmes d’apprentissage et la mémoire, les conférences ou les ateliers. Choisissez Autre si le sujet est différent." },
+      { "question": "Existe-t-il un autre moyen de contact si le formulaire est indisponible ?", "answer": "Vous pouvez utiliser le lien GitHub de cette page. Le formulaire nécessite la configuration du service d’envoi d’e-mails par le responsable du site." }
+    ]
+  }
+}

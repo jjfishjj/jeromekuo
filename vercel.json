@@ -1,7 +1,7 @@
 {
   "rewrites": [
     { "source": "/resume", "destination": "/resume.html" },
-    { "source": "/resume/summary", "destination": "/resume.html" },
+    { "source": "/resume/summary", "destination": "/resume-summary.html" },
     { "source": "/resume-summary", "destination": "/resume-summary.html" },
     { "source": "/memory", "destination": "/memory.html" },
     { "source": "/journal", "destination": "/journal.html" },

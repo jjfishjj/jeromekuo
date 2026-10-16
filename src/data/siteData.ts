@@ -170,7 +170,7 @@ export const coreAxes = [
 
 export const learningStyles = {
   title: "Four Learning Styles",
-  subtitle: "Understanding How People Learn",
+  subtitle: "依任務選擇方法，並用練習確認理解",
   intro: "每個人吸收與保留資訊的方式不同。理解這些差異，是設計有效學習系統的第一步。",
   styles: [
     {
@@ -178,9 +178,9 @@ export const learningStyles = {
       name: "Visual",
       nameZh: "視覺型",
       color: "blue",
-      description: "透過圖表、圖像、影片與顏色標記學習。看過一次就能記住。",
-      strengths: ["擅長地圖與圖表", "視覺化筆記（心智圖）", "快速識別模式"],
-      challenges: "對純文字或抽象內容較難專注",
+      description: "可嘗試用圖表、圖像、影片或顏色標記整理資訊；是否有助理解，仍要透過回想與練習確認。",
+      strengths: ["用地圖與圖表整理關係", "以心智圖呈現概念", "用標記回顧資料模式"],
+      challenges: "遇到抽象概念時，可加上文字說明與具體例子。",
       techniques: ["心智圖與流程圖", "符號與顏色標記", "教學影片與動畫", "心像技巧"],
     },
     {
@@ -188,9 +188,9 @@ export const learningStyles = {
       name: "Auditory",
       nameZh: "聽覺型",
       color: "green",
-      description: "透過講座、錄音與討論吸收資訊。聽比讀更有效。",
-      strengths: ["有效運用錄音筆記", "口頭摘要與小組討論", "口語表達能力強"],
-      challenges: "處理靜態圖表或公式較困難",
+      description: "可嘗試透過講解、錄音與討論接觸資訊；聽或讀哪種方式較合適，取決於內容與練習方式。",
+      strengths: ["用口頭摘要說明概念", "討論後整理疑問", "錄製短音訊供回顧"],
+      challenges: "搭配筆記或示意圖，留下可以自行檢查的內容。",
       techniques: ["錄音重播", "朗讀筆記", "節奏與韻律記憶", "對話與討論"],
     },
     {
@@ -198,9 +198,9 @@ export const learningStyles = {
       name: "Kinesthetic",
       nameZh: "動覺型",
       color: "orange",
-      description: "透過實作、動作與身體記憶學習。「做中學」比被動聽講更有效。",
-      strengths: ["手勢與角色扮演", "遊戲與閃卡", "實際操作練習"],
-      challenges: "純抽象內容難以透過動作捕捉",
+      description: "可透過實作、模擬或操作接觸概念；設計活動時要對準學習目標，並安排回顧或回饋。",
+      strengths: ["用操作示範流程", "以角色扮演演練情境", "用閃卡進行提取練習"],
+      challenges: "抽象內容可先拆成具體步驟，再逐步連回原理。",
       techniques: ["手勢與動作配對", "角色扮演與模擬", "實物操作與製作"],
     },
     {
@@ -208,15 +208,15 @@ export const learningStyles = {
       name: "Logical / Verbal",
       nameZh: "邏輯/文字型",
       color: "purple",
-      description: "偏好結構化文字、筆記、分類與邏輯大綱。",
-      strengths: ["結構化筆記與摘要", "表格與符號系統", "邏輯推演"],
-      challenges: "對高度視覺或動態內容較難適應",
+      description: "可用結構化文字、分類與邏輯大綱整理資訊；整理後仍應用自己的話回想或解題。",
+      strengths: ["用分層大綱拆解問題", "以表格比較概念", "寫出推理步驟"],
+      challenges: "可搭配實例或圖解說明抽象關係，避免只抄錄文字。",
       techniques: ["階層式大綱", "重點標記與摘要", "符號與縮寫系統", "邏輯分類法"],
     },
   ],
   crossTraining: {
-    title: "Cross-Training: 混合學習法",
-    description: "即使你傾向某種學習型態，混合運用不同方法能提升學習彈性與整體理解力。",
+    title: "依任務混合學習策略",
+    description: "依內容搭配圖解、說明、實作或文字整理，再透過回想與應用檢查理解；不必把學習者固定歸類。",
     examples: [
       { style: "視覺型", suggestion: "加入朗讀或小型實作任務" },
       { style: "聽覺型", suggestion: "嘗試繪圖或筆記來強化所聽內容" },
@@ -270,26 +270,26 @@ export const learningStyles = {
 
 export const journalProject = {
   title: "Daily Growth Journal",
-  subtitle: "記憶與行為資料化的實驗",
+  subtitle: "以結構化反思整理日常觀察的設計範例",
   status: "Ongoing",
   github: "https://github.com/jjfishjj/daily-growth-journal",
   why: {
     title: "Why",
-    content: "傳統日記記錄「發生了什麼」，但這個專案關注的是「我如何處理、吸收、並轉化經驗」。透過結構化的自我觀察，將抽象的成長過程轉換為可追蹤的資料。",
+    content: "這個日誌方案示範如何從「發生了什麼」延伸記錄「當時如何感受、採取什麼行動，以及事後如何理解」。欄位是可調整的自我觀察框架，不代表已完成長期實測。",
   },
   what: {
     title: "What",
-    content: "記錄身體狀態、心理意識、行為模式等多維度資料。不是流水帳，而是有系統的反思結構。",
+    content: "可依需求記錄身體狀態、情緒、行為與反思。重點是選擇一致且有用的欄位；本頁的圖表數值則是示意資料。",
     dimensions: ["身體覺察", "心理狀態", "行為紀錄", "反思洞察"],
   },
   how: {
     title: "How",
-    content: "建立可重複的紀錄框架，每日填寫固定維度，長期累積後進行模式分析。",
+    content: "可從少量固定欄位開始，定期回顧並視需要調整。記錄頻率與分析方式應依個人情況決定，不必強求每日填寫。",
     structure: ["固定維度欄位", "每日紀錄習慣", "定期回顧與分析", "迭代優化結構"],
   },
   insight: {
     title: "Insight",
-    content: "這個專案是學習型態理論的實踐證明：透過多感官紀錄（書寫、視覺化、邏輯分類），強化記憶與行為改變的連結。長期紀錄顯示，有意識的反思能加速模式識別與行為調整。",
+    content: "此頁呈現一種以記錄和回顧支持自我觀察的設計構想。頁面圖表為示意資料，無法證實記憶訓練、行為改變或學習風格理論的效果。",
   },
   note: "⚠️ 目前 GitHub Repo 顯示 404，可能為私有專案或已更名。請補充正確連結或專案細節。",
 };

@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, ChevronRight, Sparkles, Zap, Brain, Globe, Rocket, Heart, Target, TrendingUp, Award } from "lucide-react";
-import { siteConfig } from "@/data/siteData";
+import { ArrowRight, CheckCircle2, ChevronRight, Sparkles, Brain, TrendingUp, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
-import { Marquee } from "@/components/ui/Marquee";
 import { useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useSiteText } from "@/hooks/useSiteText";
 import placeholderProfile from "@/assets/placeholder-profile.jpg";
+import "./Index.css";
 
 const Index = () => {
   const [skillTab, setSkillTab] = useState<"learning" | "tech">("learning");
@@ -51,14 +50,6 @@ const Index = () => {
     link: ["/memory", "/journal", "/language"][i - 1],
   }));
 
-  const testimonials = [1, 2, 3].map((i) => ({
-    avatar: ["👨‍🎓", "👩‍💼", "👨‍💻"][i - 1],
-    quote: t(`testimonial.${i}.quote`),
-    name: t(`testimonial.${i}.name`),
-    role: t(`testimonial.${i}.role`),
-    org: t(`testimonial.${i}.org`),
-  }));
-
   // Hero text from DB with i18n fallback
   const heroRole1 = useSiteText("hero.role1", t("hero.role1"));
   const heroRole2 = useSiteText("hero.role2", t("hero.role2"));
@@ -71,115 +62,86 @@ const Index = () => {
   const heroGreeting = useSiteText("hero.greeting", t("hero.greeting"));
 
   const domains = [heroDomain1, heroDomain2, heroDomain3];
-  const stats = [
-    { value: "4+", label: t("stats.research") },
-    { value: "5", label: t("stats.languages") },
-    { value: "∞", label: t("stats.continuous") },
-  ];
-
-  // Marquee items - 跑馬燈內容
-  const marqueeItems = [
-    <><Sparkles className="h-4 w-4 text-primary" /><span>{t("hero.domain1")}</span></>,
-    <><Brain className="h-4 w-4 text-primary" /><span>{t("hero.domain2")}</span></>,
-    <><Globe className="h-4 w-4 text-primary" /><span>{t("hero.domain3")}</span></>,
-    <><Rocket className="h-4 w-4 text-primary" /><span>{t("services.title")}</span></>,
-    <><Heart className="h-4 w-4 text-primary" /><span>{t("cta.badge")}</span></>,
-    <><Award className="h-4 w-4 text-primary" /><span>{t("testimonials.title")}</span></>,
-    <><TrendingUp className="h-4 w-4 text-primary" /><span>{t("cases.title")}</span></>,
-    <><Zap className="h-4 w-4 text-primary" /><span>{t("skills.title")}</span></>,
-  ];
-
   return (
     <Layout>
-      {/* Top Marquee 跑馬燈 */}
-      <div className="border-b border-border/30 bg-secondary/40 py-3">
-        <Marquee items={marqueeItems} speed="normal" />
-      </div>
+      <section className="home-hero relative overflow-hidden">
+        <div className="section-container home-hero-grid relative z-10">
+          <div className="home-hero-copy">
+            <span className="home-hero-kicker">
+              <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+              {heroGreeting}
+            </span>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] md:min-h-[90vh] flex items-center overflow-hidden py-12 md:py-0">
-        <div className="section-container relative z-10 w-full">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Mobile: image first for visual impact */}
-            <div className="relative opacity-0 animate-slide-up [animation-delay:0.2s] order-first md:order-last">
-              <div className="relative max-w-[280px] sm:max-w-[320px] md:max-w-none mx-auto">
-                <MediaPlaceholder type="image" aspectRatio="3/4" caption={t("photo.profile")} contentKey="home.hero.profile" fallbackSrc={placeholderProfile} />
-                <div className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 glass-card px-3 py-2 md:px-4 md:py-3 animate-float">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base md:text-lg">🧠</span>
-                    <div>
-                      <div className="text-[10px] md:text-xs text-muted-foreground">{t("photo.badge1.label")}</div>
-                      <div className="text-xs md:text-sm font-semibold text-primary">{t("photo.badge1.value")}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 glass-card px-3 py-2 md:px-4 md:py-3 animate-float [animation-delay:1.5s]">
-                  <div className="flex items-center gap-2">
-                    <span className="text-base md:text-lg">📊</span>
-                    <div>
-                      <div className="text-[10px] md:text-xs text-muted-foreground">{t("photo.badge2.label")}</div>
-                      <div className="text-xs md:text-sm font-semibold text-primary">{t("photo.badge2.value")}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <h1 className="home-hero-title">
+              <span>{heroRole1}</span>
+              <span className="home-hero-title-accent"><span aria-hidden="true">×</span> {heroRole2}</span>
+            </h1>
+
+            <p className="home-hero-description">{heroTagline}</p>
+
+            <div className="home-hero-domains" role="list" aria-label={t("skills.title")}>
+              {domains.map((domain) => (
+                <span key={domain} role="listitem"><CheckCircle2 aria-hidden="true" />{domain}</span>
+              ))}
             </div>
 
-            <div className="space-y-5 md:space-y-6 text-center md:text-left">
-              <span className="tag-pill opacity-0 animate-fade-in animate-blink">
-                <Sparkles className="h-3 w-3 mr-1 inline" />
-                {heroGreeting}
-              </span>
-
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight opacity-0 animate-slide-up [animation-delay:0.1s]">
-                <span className="whitespace-pre-line text-foreground">
-                  {heroRole1}
-                  <span className="text-primary"> ×</span>
-                  {"\n"}
-                  <span className="text-shimmer">{heroRole2}</span>
-                </span>
-              </h1>
-
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg mx-auto md:mx-0 opacity-0 animate-slide-up [animation-delay:0.2s]">
-                {heroTagline}
-              </p>
-
-              <div className="flex flex-wrap justify-center md:justify-start gap-2 opacity-0 animate-slide-up [animation-delay:0.25s]">
-                {domains.map((d) => (
-                  <span key={d} className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
-                    {d}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 opacity-0 animate-slide-up [animation-delay:0.3s] sm:justify-center md:justify-start">
+            <div className="home-hero-actions">
+              <Button asChild size="lg" className="w-full sm:w-auto home-button-primary">
                 <Link to="/contact" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
-                    {heroCtaPrimary}
-                  </Button>
+                  {heroCtaPrimary}<ArrowRight aria-hidden="true" />
                 </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto home-button-secondary">
                 <Link to="/memory" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto border-border hover:border-primary hover:text-primary px-8">
-                    {heroCtaSecondary}
-                  </Button>
+                  {heroCtaSecondary}
                 </Link>
-              </div>
+              </Button>
+            </div>
 
-              <div className="flex justify-center md:justify-start gap-6 sm:gap-8 pt-6 border-t border-border/50 opacity-0 animate-slide-up [animation-delay:0.4s]">
-                {stats.map((s, idx) => (
-                  <div key={s.label}>
-                    <div
-                      className="stat-number animate-number-pop"
-                      style={{ animationDelay: `${idx * 0.4}s` }}
-                    >
-                      {s.value}
-                    </div>
-                    <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{s.label}</div>
-                  </div>
-                ))}
+            <nav className="home-hero-explore" aria-label={t("footer.navigation")}>
+              {[
+                { label: t("nav.memory"), to: "/memory" },
+                { label: t("nav.journal"), to: "/journal" },
+                { label: t("nav.language"), to: "/language" },
+              ].map((item) => (
+                <Link key={item.to} to={item.to}>{item.label}<ArrowRight aria-hidden="true" /></Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="home-hero-visual">
+            <div className="home-portrait-frame">
+              <MediaPlaceholder
+                type="image"
+                aspectRatio="3/4"
+                contentKey="home.hero.profile"
+                fallbackSrc={placeholderProfile}
+                loading="eager"
+                fetchPriority="high"
+                className="home-portrait-media"
+              />
+              <div className="home-portrait-caption">
+                <span className="home-portrait-index">JK / PROFILE</span>
+                <span>{t("photo.profile")}</span>
               </div>
             </div>
+            <div className="home-visual-note home-visual-note-top">
+              <Brain aria-hidden="true" />
+              <span>{t("photo.badge1.label")}<strong>{t("photo.badge1.value")}</strong></span>
+            </div>
+            <div className="home-visual-note home-visual-note-bottom">
+              <TrendingUp aria-hidden="true" />
+              <span>{t("photo.badge2.label")}<strong>{t("photo.badge2.value")}</strong></span>
+            </div>
+            <span className="home-visual-orbit" aria-hidden="true">JK—01</span>
+          </div>
+        </div>
+
+        <div className="home-expertise-strip">
+          <div className="section-container home-expertise-inner">
+            <span className="home-expertise-label">{t("skills.title")}</span>
+            <div>{domains.map((domain, index) => <span key={domain}><i>0{index + 1}</i>{domain}</span>)}</div>
+            <Link to="/systems">{t("services.title")}<ArrowRight aria-hidden="true" /></Link>
           </div>
         </div>
       </section>
@@ -193,8 +155,10 @@ const Index = () => {
           </div>
 
           <div className="flex justify-center mb-10">
-            <div className="inline-flex bg-secondary rounded-lg p-1">
+            <div className="inline-flex bg-secondary rounded-lg p-1" role="group" aria-label={t("skills.title")}>
               <button
+                type="button"
+                aria-pressed={skillTab === "learning"}
                 onClick={() => setSkillTab("learning")}
                 className={`px-5 py-2 rounded-md text-sm font-medium transition-all ${
                   skillTab === "learning" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
@@ -203,6 +167,8 @@ const Index = () => {
                 {t("skills.learning")}
               </button>
               <button
+                type="button"
+                aria-pressed={skillTab === "tech"}
                 onClick={() => setSkillTab("tech")}
                 className={`px-5 py-2 rounded-md text-sm font-medium transition-all ${
                   skillTab === "tech" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
@@ -266,22 +232,22 @@ const Index = () => {
                     ))}
                   </ul>
                 </div>
-                <Link to="/contact" className="mt-6 block">
-                  <Button variant="outline" size="sm" className="w-full border-border hover:border-primary hover:text-primary">
+                <Button asChild variant="outline" size="sm" className="w-full border-border hover:border-primary hover:text-primary">
+                  <Link to="/contact" className="mt-6 block">
                     {t("services.bookConsult")}
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             ))}
           </div>
 
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-4">{t("services.notSure")}</p>
-            <Link to="/contact">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link to="/contact">
                 {t("services.freeConsult")}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -374,34 +340,10 @@ const Index = () => {
             <div className="glass-card inline-block p-8 max-w-lg animate-glow">
               <h3 className="text-lg font-semibold text-foreground mb-2">{t("cases.ctaTitle")}</h3>
               <p className="text-sm text-muted-foreground mb-4">{t("cases.ctaDesc")}</p>
-              <Link to="/contact">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90">{t("cases.ctaButton")}</Button>
-              </Link>
+              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                <Link to="/contact">{t("cases.ctaButton")}</Link>
+              </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="section-container">
-          <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("testimonials.title")}</h2>
-            <p className="text-muted-foreground">{t("testimonials.subtitle")}</p>
-          </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
-            {testimonials.map((tm, i) => (
-              <div key={i} className="glass-card p-6">
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">"{tm.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{tm.avatar}</span>
-                  <div>
-                    <div className="text-sm font-semibold text-foreground">{tm.name}</div>
-                    <div className="text-xs text-muted-foreground">{tm.role} · {tm.org}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -429,16 +371,16 @@ const Index = () => {
               ))}
             </div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
+              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 font-semibold">
+                <Link to="/contact">
                   {t("cta.bookCall")}
-                </Button>
-              </Link>
-              <Link to="/memory">
-                <Button size="lg" variant="outline" className="border-border hover:border-primary hover:text-primary px-8">
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-border hover:border-primary hover:text-primary px-8">
+                <Link to="/memory">
                   {t("cta.browseResources")}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

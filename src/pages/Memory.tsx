@@ -1,4 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
+import { PageFaq } from "@/components/PageFaq";
+import { Link } from "react-router-dom";
 import { learningStyles } from "@/data/siteData";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Eye, Ear, Hand, ListChecks, Shuffle, Lightbulb } from "lucide-react";
@@ -39,10 +41,10 @@ const Memory = () => {
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <span className="inline-block text-xs font-medium text-accent bg-highlight-subtle px-2.5 py-1 rounded-full mb-4">
-              Core Theory
+              記憶與學習策略
             </span>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
-              {learningStyles.title}
+              記憶與學習策略：四種學習傾向與練習方法
             </h1>
             <p className="text-xl text-muted-foreground mb-2">
               {learningStyles.subtitle}
@@ -50,6 +52,11 @@ const Memory = () => {
             <p className="text-sm text-muted-foreground">
               發佈於 Jerome Kuo 個人研究筆記
             </p>
+            <nav aria-label="麵包屑" className="mt-6 text-sm text-muted-foreground">
+              <Link to="/" className="hover:text-accent">首頁</Link>
+              <span aria-hidden="true" className="px-2">/</span>
+              <span aria-current="page">記憶與學習</span>
+            </nav>
           </div>
         </div>
       </section>
@@ -76,6 +83,31 @@ const Memory = () => {
             <p className="text-lg text-foreground leading-relaxed">
               {learningStyles.intro}
             </p>
+            <aside className="mt-8 rounded-xl border border-accent/20 bg-accent/5 p-5" aria-labelledby="learning-styles-evidence">
+              <h2 id="learning-styles-evidence" className="text-base font-semibold text-foreground mb-2">
+                如何理解「學習風格」
+              </h2>
+              <p className="text-sm leading-7 text-muted-foreground">
+                視覺、聽覺、動覺等分類可作為觀察偏好和嘗試策略的起點，不是固定能力或診斷。研究目前不足以支持普遍依固定類別配對教學；建議依任務選擇合適媒介，並用練習與回饋檢查學習效果。
+              </p>
+              <p className="mt-3 text-xs leading-6 text-muted-foreground">
+                延伸閱讀：{" "}
+                <a className="underline underline-offset-4 hover:text-accent" href="https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2023.1147498/full" target="_blank" rel="noreferrer noopener">
+                  2023 年研究回顧
+                </a>
+                {" · "}
+                <a className="underline underline-offset-4 hover:text-accent" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11270031/" target="_blank" rel="noreferrer noopener">
+                  2024 年統合分析
+                </a>
+              </p>
+            </aside>
+            <nav aria-label="本頁導覽" className="mt-8 flex flex-wrap gap-2">
+              {learningStyles.styles.map((style) => (
+                <a key={style.id} href={`#${style.id}`} className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-accent hover:text-accent">
+                  {style.nameZh}
+                </a>
+              ))}
+            </nav>
             <hr className="my-10 border-border/50" />
           </div>
         </div>
@@ -90,7 +122,7 @@ const Memory = () => {
               const colorClass = styleColors[style.color as keyof typeof styleColors];
 
               return (
-                <article key={style.id}>
+                <article key={style.id} id={style.id} className="scroll-mt-24">
                   {/* Style Header */}
                   <div className="flex items-center gap-4 mb-6">
                     <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${colorClass}`}>
@@ -278,6 +310,8 @@ const Memory = () => {
           </div>
         </div>
       </section>
+
+      <PageFaq page="memory" />
     </Layout>
   );
 };

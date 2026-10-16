@@ -8,6 +8,8 @@ interface MediaPlaceholderProps {
   className?: string;
   contentKey?: string;
   fallbackSrc?: string;
+  loading?: "eager" | "lazy";
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 const MediaPlaceholder = ({
@@ -17,8 +19,10 @@ const MediaPlaceholder = ({
   className = "",
   contentKey,
   fallbackSrc,
+  loading: imageLoading = "lazy",
+  fetchPriority = "auto",
 }: MediaPlaceholderProps) => {
-  const { media, loading } = useSiteContent(contentKey);
+  const { media } = useSiteContent(contentKey);
   const Icon = type === "video" ? Video : ImageIcon;
   const label = type === "video" ? "影片區域" : "圖片區域";
 
@@ -42,8 +46,9 @@ const MediaPlaceholder = ({
             <img
               src={displayUrl}
               alt={caption || ""}
+              {...(fetchPriority === "auto" ? {} : { fetchpriority: fetchPriority })}
               className="w-full h-full object-cover"
-              loading="lazy"
+              loading={imageLoading}
             />
           )}
         </div>
