@@ -1,4 +1,5 @@
 {
+  "/learning-strategy": { "title": "AI 個人化學習與記憶策略｜Jerome Kuo", "description": "描述你的學習挑戰、目標與可投入的時間，取得 AI 個人化學習方法、七天練習計畫與記憶回顧策略。" },
   "/": { "title": "Jerome Kuo — Learning Systems & AI Product", "description": "Learning systems, AI product leadership, analytics, language learning, and applied technology.", "keywords": "Jerome Kuo, AI product, learning systems, analytics, language learning" },
   "/memory": { "title": "記憶與學習策略：多感官學習、記憶練習與設計｜Jerome Kuo", "description": "探索多感官學習、主動回憶與記憶練習，依不同任務選擇策略；附有研究來源與可執行的學習方法整理，不把學習傾向視為固定標籤。", "keywords": "記憶策略, 多感官學習, 主動回憶, 間隔練習, 學習科學" },
   "/journal": { "title": "成長日誌與自我反思：行為紀錄、回顧流程與設計｜Jerome Kuo", "description": "了解結構化自我反思框架，涵蓋身體、情緒、行為與定期回顧；頁面圖表標示為示意數據，不代表個人追蹤結果。", "keywords": "成長日誌, 自我反思, 行為紀錄, 成長追蹤, 個人儀表板" },

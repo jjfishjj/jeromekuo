@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import RouteMetadata from "@/components/RouteMetadata";
 
 const Memory = lazy(() => import("./pages/Memory"));
+const LearningStrategy = lazy(() => import("./pages/LearningStrategy"));
 const Journal = lazy(() => import("./pages/Journal"));
 const Language = lazy(() => import("./pages/Language"));
 const Game = lazy(() => import("./pages/Game"));
@@ -36,6 +37,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/memory" element={<Memory />} />
+              <Route path="/learning-strategy" element={<LearningStrategy />} />
               <Route path="/journal" element={<Journal />} />
               <Route path="/language" element={<Language />} />
               <Route path="/game" element={<Game />} />
