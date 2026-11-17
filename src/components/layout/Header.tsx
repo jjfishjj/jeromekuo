@@ -8,6 +8,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { languageNames, languageFlags } from "@/i18n/types";
 import type { Language } from "@/i18n/types";
 import { a11yCopy } from "@/data/a11yCopy";
+import { learningStrategyCopy } from "@/data/learningStrategyCopy";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +19,7 @@ import {
 const navKeys = [
   { key: "nav.home", path: "/" },
   { key: "nav.memory", path: "/memory" },
+  { key: "nav.learningStrategy", path: "/learning-strategy" },
   { key: "nav.journal", path: "/journal" },
   { key: "nav.language", path: "/language" },
   { key: "nav.game", path: "/game" },
@@ -62,7 +64,7 @@ export const Header = () => {
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                {t(item.key)}
+                {item.path === "/learning-strategy" ? learningStrategyCopy[lang].nav : t(item.key)}
               </Link>
             ))}
           </div>
@@ -138,7 +140,7 @@ export const Header = () => {
                       : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   )}
                 >
-                  {t(item.key)}
+                  {item.path === "/learning-strategy" ? learningStrategyCopy[lang].nav : t(item.key)}
                 </Link>
               ))}
               <div className="pt-3 mt-2 border-t border-border/30 space-y-2">
