@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Trash2, Upload, LogOut, Image, FileText, MapPin, Type, AlertCircle } from "lucide-react";
 import AdminImageSlots from "@/components/admin/AdminImageSlots";
 import AdminTextSlots from "@/components/admin/AdminTextSlots";
+import AdminStrategyExamples from "@/components/admin/AdminStrategyExamples";
 
 interface MediaItem {
   id: string;
@@ -194,7 +195,7 @@ const AdminDashboard = () => {
         </div>
 
         <Tabs defaultValue="text">
-          <TabsList className="mb-6">
+          <TabsList className="mb-6 h-auto flex-wrap">
             <TabsTrigger value="text" className="gap-1.5">
               <Type className="h-4 w-4" /> 前台文字
             </TabsTrigger>
@@ -207,7 +208,14 @@ const AdminDashboard = () => {
             <TabsTrigger value="content" className="gap-1.5">
               <FileText className="h-4 w-4" /> 頁面內容
             </TabsTrigger>
+            <TabsTrigger value="strategy" className="gap-1.5">
+              <Type className="h-4 w-4" />AI 學習策略
+            </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="strategy">
+            <AdminStrategyExamples />
+          </TabsContent>
 
           <TabsContent value="text">
             <AdminTextSlots />

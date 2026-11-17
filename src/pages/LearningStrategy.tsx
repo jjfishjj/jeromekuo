@@ -11,11 +11,13 @@ import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { learningStrategyCopy } from "@/data/learningStrategyCopy";
 import { learningInputSchema, readStrategyStream } from "@/lib/learningStrategy";
+import { useStrategyExamples } from "@/hooks/useStrategyExamples";
 import cover from "@/assets/placeholder-memory-cover.jpg";
 
 export default function LearningStrategy() {
   const { lang } = useLanguage();
   const c = learningStrategyCopy[lang];
+  const examples = useStrategyExamples(lang) ?? c.samples.map((question, i) => ({ question, answer: c.sampleValues[i] }));
   const [challenge, setChallenge] = useState("");
   const [goal, setGoal] = useState("");
   const [minutes, setMinutes] = useState("20");
@@ -76,7 +78,7 @@ export default function LearningStrategy() {
         </div>
         <fieldset disabled={loading} className="space-y-2">
           <legend className="mb-2 text-xs text-muted-foreground">{c.examples}</legend>
-          <div className="flex flex-wrap gap-2">{c.samples.map((sample, i) => <Button key={sample} type="button" variant="outline" size="sm" className="h-auto whitespace-normal text-start" onClick={() => setChallenge(c.sampleValues[i])}>{sample}</Button>)}</div>
+          <div className="flex flex-wrap gap-2">{examples.map((ex, i) => <Button key={i} type="button" variant="outline" size="sm" className="h-auto whitespace-normal text-start" onClick={() => setChallenge(ex.answer)}>{ex.question}</Button>)}</div>
         </fieldset>
         <div className="space-y-2"><Label htmlFor="goal">{c.goal}</Label><Input id="goal" value={goal} onChange={(e) => setGoal(e.target.value)} maxLength={300} placeholder={c.goalPlaceholder} disabled={loading} /></div>
         <div className="space-y-2"><Label htmlFor="minutes">{c.time}</Label><div className="flex items-center gap-3"><Input id="minutes" type="number" min={5} max={120} required value={minutes} onChange={(e) => setMinutes(e.target.value)} disabled={loading} className="w-24" /><span className="text-sm text-muted-foreground">{c.minutes}</span></div></div>
