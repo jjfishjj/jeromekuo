@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Brain, Sparkles, Square, Copy, Check, ArrowRight, Loader2 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -87,7 +88,7 @@ export default function LearningStrategy() {
       </form>
       <div className="min-w-0 border-t border-border pt-6 lg:border-s lg:border-t-0 lg:ps-10 lg:pt-0" aria-busy={loading}>
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><h2 className="flex items-center gap-2 text-lg font-semibold"><Brain className="h-5 w-5 text-primary" />{c.result}</h2>{result && !loading && <Button type="button" variant="ghost" size="sm" onClick={copy} className="gap-2">{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{copied ? c.copied : c.copy}</Button>}</div>
-        {result ? <article className="break-words text-sm leading-7 [&_h1]:mb-4 [&_h1]:text-xl [&_h2]:mb-3 [&_h2]:mt-7 [&_h2]:text-lg [&_h3]:mb-2 [&_h3]:mt-5 [&_h3]:text-base [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:ps-5 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:ps-5 [&_li]:mb-2"><ReactMarkdown disallowedElements={["img", "a"]} unwrapDisallowed>{result}</ReactMarkdown></article> : <div className="flex min-h-64 flex-col items-center justify-center border-y border-dashed border-border py-12 text-center"><Brain className="mb-5 h-10 w-10 text-primary/60" /><h3 className="font-medium">{loading ? c.generating : c.empty}</h3><p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">{loading ? "" : c.emptyBody}</p></div>}
+        {result ? <article className="break-words text-sm leading-7 [&_h1]:mb-4 [&_h1]:text-xl [&_h2]:mb-3 [&_h2]:mt-7 [&_h2]:text-lg [&_h3]:mb-2 [&_h3]:mt-5 [&_h3]:text-base [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:ps-5 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:ps-5 [&_li]:mb-2 [&_table]:w-full [&_table]:table-fixed [&_td]:border [&_td]:border-border [&_td]:p-3 [&_th]:border [&_th]:border-border [&_th]:bg-muted [&_th]:p-3"><ReactMarkdown remarkPlugins={[remarkGfm]} disallowedElements={["img", "a"]} unwrapDisallowed>{result}</ReactMarkdown></article> : <div className="flex min-h-64 flex-col items-center justify-center border-y border-dashed border-border py-12 text-center"><Brain className="mb-5 h-10 w-10 text-primary/60" /><h3 className="font-medium">{loading ? c.generating : c.empty}</h3><p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">{loading ? "" : c.emptyBody}</p></div>}
         <p className="mt-8 border-t border-border pt-5 text-xs leading-6 text-muted-foreground">{c.disclaimer}</p>
         <Button asChild variant="link" className="mt-3 h-auto whitespace-normal px-0 text-start"><Link to="/contact">{c.consult}<ArrowRight className="ms-2 h-4 w-4 shrink-0" /></Link></Button>
       </div>

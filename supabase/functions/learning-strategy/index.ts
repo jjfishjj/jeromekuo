@@ -2,6 +2,7 @@ import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createResponsesCall } from "../_shared/responses.ts";
 import { strategyInput } from "./validation.ts";
+import { getLovableAiGatewayResponseHeaders } from "../_shared/run-id.ts";
 
 const languages = { zh: "Traditional Chinese", en: "English", es: "Spanish", he: "Hebrew", ko: "Korean", fr: "French" };
 const instructions = `You are a practical learning and memory strategy coach on Jerome Kuo's website.
@@ -61,7 +62,7 @@ Deno.serve(async (req) => {
   try {
     const input = parsed.data;
     const callRequest = new Request(req.url, { headers: req.headers, signal: abort.signal });
-    const { result } = createResponsesCall(callRequest, {
+    const { result, gateway } = createResponsesCall(callRequest, {
       apiKey, baseURL: "https://ai.gateway.lovable.dev/v1", model: "openai/gpt-6-astra",
     }, [{ role: "user", content: JSON.stringify({ ...input, responseLanguage: languages[input.language] }) }], instructions);
     const iterator = result.fullStream[Symbol.asyncIterator]();
@@ -70,7 +71,7 @@ Deno.serve(async (req) => {
     while (!first.done && (first.value.type === "start" || first.value.type === "start-step")) first = await iterator.next();
     if (!first.done && first.value.type === "error") {
       const safe = await recordFailure(first.value.error);
-      return json(safe.message, safe.status);
+      return json(safe.message, safe.status, gateway.getRunId() ? { "X-Lovable-AIG-Run-ID": gateway.getRunId() ?? "" } : undefined);
     }
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
@@ -101,7 +102,10 @@ Deno.serve(async (req) => {
       },
       cancel() { abort.abort(); },
     });
-    return new Response(stream, { headers: { ...corsHeaders, "Content-Type": "application/x-ndjson", "Cache-Control": "no-store" } });
+    const headers = getLovableAiGatewayResponseHeaders(undefined, { ...corsHeaders, "Content-Type": "application/x-ndjson", "Cache-Control": "no-store" });
+    const runId = gateway.getRunId();
+    if (runId) headers.set("X-Lovable-AIG-Run-ID", runId);
+    return new Response(stream, { headers: getLovableAiGatewayResponseHeaders(undefined, headers) });
   } catch (error) {
     if (abort.signal.aborted) return json("Request cancelled", 499);
     const safe = await recordFailure(error);
